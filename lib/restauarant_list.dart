@@ -12,6 +12,8 @@ class RestaurantList extends StatelessWidget {
     {'name': 'Chronic Tacos', 'image': 'assets/images/chronic_tacos.jpg'},
     {'name': 'Hibachi-San', 'image': 'assets/images/hibachi_san.jpg'},
     {'name': 'The Halal Shack', 'image': 'assets/images/halal_shack.jpg'},
+    //{'name': 'Starbucks at Glen More', 'image': 'assets/images/glen_more.jpg'},
+    //{'name': 'Bytes', 'image': 'assets/images/bytes.jpg'},
   ];
 
   @override
