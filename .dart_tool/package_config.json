@@ -176,6 +176,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "scroll_to_index",
+      "rootUri": "file:///Users/Alan/.pub-cache/hosted/pub.dev/scroll_to_index-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///Users/Alan/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -266,7 +272,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2024-02-20T21:43:50.237732Z",
+  "generated": "2024-03-11T21:23:18.625454Z",
   "generator": "pub",
   "generatorVersion": "3.1.2"
 }
