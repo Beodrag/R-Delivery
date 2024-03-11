@@ -5,7 +5,11 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+<<<<<<< HEAD
 import 'restaurant_list.dart';
+=======
+
+>>>>>>> f65a08f751c1463344e5d21f478c4ac8e464175a
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -69,6 +73,7 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   ElevatedButton(
+<<<<<<< HEAD
                     onPressed: () {
                       // Navigate to the restaurant list page
                       Navigator.push(
@@ -76,6 +81,9 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
                         MaterialPageRoute(builder: (context) => RestaurantList()),
                       );
                     },
+=======
+                    onPressed: () {},
+>>>>>>> f65a08f751c1463344e5d21f478c4ac8e464175a
                     child: Text('Yes'),
                   ),
                   ElevatedButton(
@@ -109,7 +117,11 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
                 center: _initialCenter,
                 zoom: 16.0,
                 minZoom: 16.0,
+<<<<<<< HEAD
                 maxZoom: 18.0, // Set the maximum zoom level to 18
+=======
+                maxZoom: 18.0,
+>>>>>>> f65a08f751c1463344e5d21f478c4ac8e464175a
                 interactiveFlags: InteractiveFlag.pinchZoom | InteractiveFlag.drag,
               ),
               layers: [
