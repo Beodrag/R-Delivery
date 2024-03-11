@@ -1,15 +1,18 @@
+// main.dart
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:geocoding/geocoding.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'restaurant_list.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Food Delivery',
+      title: 'Food Robot Delivery',
       home: AddressSelectionPage(),
     );
   }
@@ -22,93 +25,122 @@ class AddressSelectionPage extends StatefulWidget {
 
 class _AddressSelectionPageState extends State<AddressSelectionPage> {
   final LatLng _initialCenter = LatLng(33.9763, -117.3247);
-  final TextEditingController _addressController = TextEditingController();
+  MapController _mapController = MapController();
 
-  void _updatePosition(LatLng? latlng) async {
-    if (latlng == null) return;
+  Future<String> _getAddress(LatLng location) async {
+    final endpoint = 'nominatim.openstreetmap.org';
+    final path = '/reverse';
+    final params = {
+      'lat': location.latitude.toString(),
+      'lon': location.longitude.toString(),
+      'format': 'json',
+    };
 
-    List<Placemark> placemarks = await placemarkFromCoordinates(latlng.latitude, latlng.longitude);
-    if (placemarks.isNotEmpty) {
-      Placemark place = placemarks.first;
-      setState(() {
-        _addressController.text = "${place.street}, ${place.locality}, ${place.postalCode}, ${place.country}";
-      });
+    final uri = Uri.https(endpoint, path, params);
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return data['display_name'] ?? 'Unknown location';
+    } else {
+      return 'Error fetching address';
     }
+  }
+
+  void _confirmAddress() async {
+    LatLng center = _mapController.center;
+    String address = await _getAddress(center);
+
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 4,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text('Confirm Address', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(address, textAlign: TextAlign.center),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  ElevatedButton(
+                    onPressed: () {
+                      // Navigate to the restaurant list page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RestaurantList()),
+                      );
+                    },
+                    child: Text('Yes'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('No'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Select Delivery Location'),
-      ),
-      body: Stack(
-        children: <Widget>[
-          FlutterMap(
-            options: MapOptions(
-              center: _initialCenter,
-              zoom: 16.0,
-              onPositionChanged: (position, boolVal) {
-                if (position.center != null) {
-                  _updatePosition(position.center);
-                }
-              },
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Select Delivery Location'),
+        ),
+        body: Stack(
+          children: <Widget>[
+            FlutterMap(
+              mapController: _mapController,
+              options: MapOptions(
+                center: _initialCenter,
+                zoom: 16.0,
+                minZoom: 16.0,
+                maxZoom: 18.0, // Set the maximum zoom level to 18
+                interactiveFlags: InteractiveFlag.pinchZoom | InteractiveFlag.drag,
+              ),
+              layers: [
+                TileLayerOptions(
+                  urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  subdomains: ['a', 'b', 'c'],
+                ),
+              ],
             ),
-            layers: [
-              TileLayerOptions(
-                urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                subdomains: ['a', 'b', 'c'],
-              ),
-            ],
-          ),
-          Positioned(
-            top: 10,
-            right: 15,
-            left: 15,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 5,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: TextField(
-                controller: _addressController,
-                decoration: InputDecoration(
-                  hintText: 'Enter delivery address',
-                  border: InputBorder.none,
-                  icon: Icon(Icons.search),
+            Center(
+              child: Icon(Icons.location_pin, color: Colors.red, size: 40.0),
+            ),
+            Positioned(
+              bottom: 20,
+              left: 20,
+              right: 20,
+              child: ElevatedButton(
+                onPressed: _confirmAddress,
+                child: Text('Confirm Address'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  textStyle: TextStyle(fontSize: 16),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 20,
-            left: 20,
-            right: 20,
-            child: ElevatedButton(
-              onPressed: () {
-                print('Address confirmed: ${_addressController.text}');
-              },
-              child: Text('Confirm Address'),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.blue,
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                textStyle: TextStyle(fontSize: 16),
-              ),
-            ),
-          ),
-          Center(
-            child: Icon(Icons.location_pin, color: Colors.red, size: 30.0),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
+
+
