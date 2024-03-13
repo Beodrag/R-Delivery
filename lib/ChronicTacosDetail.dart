@@ -89,50 +89,283 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
 
 
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Chronic Tacos'),
-        bottom: TabBar(
-          isScrollable: true,
-          controller: _tabController,
-          tabs: [
-            Tab(text: 'Bowl'),
-            Tab(text: 'Plate'),
-            Tab(text: 'Bigger Plate'),
-            Tab(text: 'Family Meal'),
-            Tab(text: 'A La Carte'),
-            Tab(text: 'Drinks'),
-            Tab(text: 'Appetizers and More'),
-          ],
-        ),
-      ),
-      body: ListView(
-        controller: _scrollController,
-        children: [
-          AutoScrollTag(
-            key: _keys[0],
-            controller: _scrollController,
-            index: 0,
-            child: FoodCategory(
-              key: _keys[0],
-              categoryName: 'Bowl',
-              isFirstCategory: true,
-              foodList: [
-                FoodItem(
-                  name: 'Bowl',
-                  description: 'Any 1 Side & 1 Entree',
-                  image: 'assets/images/panda/bowl.webp',
-                  price: 11.09,
-                  extras: [
-                  ],
-                ),
-              ],
-            ),
-          ),
+ @override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: Text('Chronic Tacos'),
+      bottom: TabBar(
+        isScrollable: true,
+        controller: _tabController,
+        tabs: [
+          Tab(text: 'Taco Plate'),
+          Tab(text: 'Burrito'),
+          Tab(text: 'Bowl-rito'),
+          Tab(text: 'Quesadilla'),
+          Tab(text: 'Small Burrito'),
+          Tab(text: 'Drinks'),
+          Tab(text: 'Extras'),
         ],
       ),
+    ),
+    body: ListView(
+      controller: _scrollController,
+      children: [
+        AutoScrollTag(
+          key: _keys[0],
+          controller: _scrollController,
+          index: 0,
+          child: FoodCategory(
+            key: _keys[0],
+            categoryName: 'Taco Plate',
+            isFirstCategory: true,
+            foodList: [
+              FoodItem(
+                name: 'Taco Plate',
+                description: 'Includes 2 tacos with side of rice, beans, and toppings',
+                image: 'assets/images/chronic/taco.webp',
+                price: 9.95,
+                requiredOptions: [
+                  RequiredOption(
+                    name: "Pick a Protein",
+                    options: ["Carne Asada", "Pollo Asado", "Halal Chicken", "Carnitas", "Vegetarian"],
+                    optionPrices: {
+                      "Carne Asada": 1.00,
+                      "Halal Chicken": 1.00,
+                    },
+                  ),
+                  RequiredOption(
+                    name: "Pick a Style",
+                    options: ["Street Style (+ Lime, Onions, Cilantro, Salsa)", "Gringo Style(+ Lime, Lettuce, Cheese, Salsa)",
+                      "Baja Style (+ Lime, Cabbage, Cheese, Pico de Gallo, Baja Sauce)"],
+                    extras: [
+                      ExtraOption(name: "Guacamole", price: 2.25),
+                      ExtraOption(name: "Fajita Veggies", price: 1.00),
+                      ExtraOption(name: "Chips and Salsa", price: 2.25),
+                      ExtraOption(name: "Chips and Guacamole", price: 3.75),
+                      ExtraOption(name: "Churro Bites (8)", price: 3.75),
+                    ],
+                  ),
+                  RequiredOption(
+                    name: "Combo Option",
+                    options: ["Make it A Combo (Add chips, salsa, and drink)", "No Combo"],
+                    extras: [
+                      ExtraOption(name: "Combo (Add chips, salsa, and drink)", price: 3.50),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        AutoScrollTag(
+          key: _keys[1],
+          controller: _scrollController,
+          index: 1,
+          child: FoodItem(
+            name: 'Burrito',
+            description: 'Choice of protein, rice, beans, and toppings',
+            image: 'assets/images/chronic/burrito.webp',
+            price: 9.95,
+            requiredOptions: [
+              RequiredOption(
+                name: "Pick a Protein",
+                options: ["Carne Asada", "Pollo Asado", "Halal Chicken", "Carnitas", "Vegetarian"],
+                optionPrices: {
+                  "Carne Asada": 1.00,
+                  "Halal Chicken": 1.00,
+                },
+              ),
+              RequiredOption(
+                name: "Pick a Style",
+                options: ["Street Style (+ Lime, Onions, Cilantro, Salsa)", "Gringo Style(+ Lime, Lettuce, Cheese, Salsa)",
+                  "Baja Style (+ Lime, Cabbage, Cheese, Pico de Gallo, Baja Sauce)"],
+                extras: [
+                  ExtraOption(name: "Guacamole", price: 2.25),
+                  ExtraOption(name: "Fajita Veggies", price: 1.00),
+                  ExtraOption(name: "Chips and Salsa", price: 2.25),
+                  ExtraOption(name: "Chips and Guacamole", price: 3.75),
+                  ExtraOption(name: "Churro Bites (8)", price: 3.75),
+                ],
+              ),
+              RequiredOption(
+                name: "Combo Option",
+                options: ["Make it A Combo (Add chips, salsa, and drink)", "No Combo"],
+                extras: [
+                  ExtraOption(name: "Combo (Add chips, salsa, and drink)", price: 3.50),
+                ],
+              ),
+            ],
+          ),
+        ),
+        AutoScrollTag(
+          key: _keys[2],
+          controller: _scrollController,
+          index: 2,
+          child: FoodItem(
+            name: 'Bowl-rito',
+            description: 'Choice of protein, rice, beans, and toppings',
+            image: 'assets/images/chronic/burrito2.webp',
+            price: 9.95,
+            requiredOptions: [
+              RequiredOption(
+                name: "Pick a Protein",
+                options: ["Carne Asada", "Pollo Asado", "Halal Chicken", "Carnitas", "Vegetarian"],
+                optionPrices: {
+                  "Carne Asada": 1.00,
+                  "Halal Chicken": 1.00,
+                },
+              ),
+              RequiredOption(
+                name: "Pick a Style",
+                options: ["Street Style (+ Lime, Onions, Cilantro, Salsa)", "Gringo Style(+ Lime, Lettuce, Cheese, Salsa)",
+                  "Baja Style (+ Lime, Cabbage, Cheese, Pico de Gallo, Baja Sauce)"],
+                extras: [
+                  ExtraOption(name: "Guacamole", price: 2.25),
+                  ExtraOption(name: "Fajita Veggies", price: 1.00),
+                  ExtraOption(name: "Chips and Salsa", price: 2.25),
+                  ExtraOption(name: "Chips and Guacamole", price: 3.75),
+                  ExtraOption(name: "Churro Bites (8)", price: 3.75),
+                ],
+              ),
+              RequiredOption(
+                name: "Combo Option",
+                options: ["Make it A Combo (Add chips, salsa, and drink)", "No Combo"],
+                extras: [
+                  ExtraOption(name: "Combo (Add chips, salsa, and drink)", price: 3.50),
+                ],
+              ),
+            ],
+          ),
+        ),
+        AutoScrollTag(
+          key: _keys[3],
+          controller: _scrollController,
+          index: 3,
+          child: FoodItem(
+            name: 'Quesadilla',
+            description: 'Choice of protein, and include chips and salsa',
+            image: 'assets/images/chronic/ques.webp',
+            price: 10.50,
+            requiredOptions: [
+              RequiredOption(
+                name: "Pick a Protein",
+                options: ["Carne Asada", "Pollo Asado", "Halal Chicken", "Carnitas", "Vegetarian"],
+                optionPrices: {
+                  "Carne Asada": 1.00,
+                  "Halal Chicken": 1.00,
+                },
+              ),
+              RequiredOption(
+                name: "Pick a Style",
+                options: ["Street Style (+ Lime, Onions, Cilantro, Salsa)", "Gringo Style(+ Lime, Lettuce, Cheese, Salsa)",
+                  "Baja Style (+ Lime, Cabbage, Cheese, Pico de Gallo, Baja Sauce)"],
+                extras: [
+                  ExtraOption(name: "Guacamole", price: 2.25),
+                  ExtraOption(name: "Fajita Veggies", price: 1.00),
+                  ExtraOption(name: "Chips and Salsa", price: 2.25),
+                  ExtraOption(name: "Chips and Guacamole", price: 3.75),
+                  ExtraOption(name: "Churro Bites (8)", price: 3.75),
+                ],
+              ),
+              RequiredOption(
+                name: "Combo Option",
+                options: ["Make it A Combo (Add chips, salsa, and drink)", "No Combo"],
+                extras: [
+                  ExtraOption(name: "Combo (Add chips, salsa, and drink)", price: 3.50),
+                ],
+              ),
+            ],
+          ),
+        ),
+        AutoScrollTag(
+          key: _keys[4],
+          controller: _scrollController,
+          index: 4,
+          child: FoodItem(
+            name: 'Small Burrito',
+            description: 'Choice of protein, rice, beans, and toppings',
+            image: 'assets/images/chronic/burrito2.webp',
+            price: 7.50,
+            requiredOptions: [
+              RequiredOption(
+                name: "Pick a Protein",
+                options: ["Carne Asada", "Pollo Asado", "Halal Chicken", "Carnitas", "Vegetarian"],
+                optionPrices: {
+                  "Carne Asada": 1.00,
+                  "Halal Chicken": 1.00,
+                },
+              ),
+              RequiredOption(
+                name: "Pick a Style",
+                options: ["Street Style (+ Lime, Onions, Cilantro, Salsa)", "Gringo Style(+ Lime, Lettuce, Cheese, Salsa)",
+                  "Baja Style (+ Lime, Cabbage, Cheese, Pico de Gallo, Baja Sauce)"],
+                extras: [
+                  ExtraOption(name: "Guacamole", price: 2.25),
+                  ExtraOption(name: "Fajita Veggies", price: 1.00),
+                  ExtraOption(name: "Chips and Salsa", price: 2.25),
+                  ExtraOption(name: "Chips and Guacamole", price: 3.75),
+                  ExtraOption(name: "Churro Bites (8)", price: 3.75),
+                ],
+              ),
+              RequiredOption(
+                name: "Combo Option",
+                options: ["Make it A Combo (Add chips, salsa, and drink)", "No Combo"],
+                extras: [
+                  ExtraOption(name: "Combo (Add chips, salsa, and drink)", price: 3.50),
+                ],
+              ),
+            ],
+          ),
+        ),
+        AutoScrollTag(
+          key: _keys[5],
+          controller: _scrollController,
+          index: 5,
+          child: FoodItem(
+            name: 'Drinks',
+            description: 'Feeling Thirsty?',
+            image: 'assets/images/chronic/drinks.webp',
+            price: 0.00,
+            requiredOptions: [
+              RequiredOption(
+                name: "Feeling Thirsty?",
+                options: ["Regular Drink", "Specialty Drink"],
+                optionPrices: {
+                  "Regular Drink": 2.75,
+                  "Specialty Drink": 3.00,
+                },
+              ),
+            ],
+          ),
+        ),
+        AutoScrollTag(
+          key: _keys[6],
+          controller: _scrollController,
+          index: 6,
+          child: FoodItem(
+            name: 'Extras',
+            description: 'A la Carte',
+            image: 'assets/images/chronic/drinks.webp',
+            price: 0.00,
+            requiredOptions: [
+              RequiredOption(
+                name: "Extras",
+                options: ["Chips and Salsa", "Chips and Guacamole", "Churro Bites"],
+                optionPrices: {
+                  "Chips and Salsa": 2.25,
+                  "Chips and Guacamole": 3.75,
+                  "Churro Bites": 3.75,
+                },
+              ),
+            ],
+          ),
+        ),
+        
+      ]
+    )
+
+      
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ElevatedButton(
