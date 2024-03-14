@@ -90,61 +90,71 @@ class _SubwayDetailState extends State<SubwayDetail> with SingleTickerProviderSt
 
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Subway'),
-        bottom: TabBar(
-          isScrollable: true,
-          controller: _tabController,
-          tabs: [
-            Tab(text: 'Bowl'),
-            Tab(text: 'Plate'),
-            Tab(text: 'Bigger Plate'),
-            Tab(text: 'Family Meal'),
-            Tab(text: 'A La Carte'),
-            Tab(text: 'Drinks'),
-            Tab(text: 'Appetizers and More'),
-          ],
-        ),
-      ),
-      body: ListView(
-        controller: _scrollController,
-        children: [
-          AutoScrollTag(
-            key: _keys[0],
-            controller: _scrollController,
-            index: 0,
-            child: FoodCategory(
-              key: _keys[0],
-              categoryName: 'Bowl',
-              isFirstCategory: true,
-              foodList: [
-                FoodItem(
-                  name: 'Bowl',
-                  description: 'Any 1 Side & 1 Entree',
-                  image: 'assets/images/panda/bowl.webp',
-                  price: 11.09,
-                  extras: [
-                  ],
-                ),
-              ],
-            ),
-          ),
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: Text('Subway Menu'),
+      bottom: TabBar(
+        isScrollable: true,
+        controller: _tabController,
+        tabs: [
+          Tab(text: 'Sandwiches'),
+          Tab(text: 'Sides'),
+          Tab(text: 'Drinks'),
         ],
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Back to Restaurant List'),
+    ),
+    body: ListView(
+      controller: _scrollController,
+      children: [
+        AutoScrollTag(
+          key: _keys[0],
+          controller: _scrollController,
+          index: 0,
+          child: FoodCategory(
+            key: _keys[0],
+            categoryName: 'Sandwiches',
+            isFirstCategory: true,
+            foodList: [
+              FoodItem(
+                name: 'B.L.T.',
+                description: 'Bacon, lettuce, and tomato with choice of bread',
+                image: 'assets/images/subway/blt.jpg',
+                price: 6.99,
+                requiredOptions: [
+                  RequiredOption(
+                    name: "Bread",
+                    options: ["Italian", "Honey Oat", "Wheat", "Flatbread"],
+                    optionPrices: {},
+                  ),
+                  RequiredOption(
+                    name: "Toppings",
+                    options: ["Mayonnaise", "Mustard", "Lettuce", "Tomato", "Onion", "Bell Pepper", "Olives", "Peppercinis", "Salt", "Pepper"],
+                    extras: ["Vinagerette", "Red Vinegar", "Baja Chipotle", "Mayo"],
+                  ),
+                ],
+              ),
+              
+              // Add more sandwich items here
+            ],
+          ),
         ),
+        
+        // Add more AutoScrollTags for other categories
+      ],
+    ),
+    bottomNavigationBar: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('Back to Restaurant List'),
       ),
-    );
-  }
+    ),
+  );
 }
+
 
 class FoodCategory extends StatelessWidget {
   final GlobalKey key;

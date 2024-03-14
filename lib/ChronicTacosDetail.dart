@@ -89,7 +89,7 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
 
 
 
- @override
+@override
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
@@ -117,7 +117,7 @@ Widget build(BuildContext context) {
           index: 0,
           child: FoodCategory(
             key: _keys[0],
-            categoryName: 'Taco Plate',
+            categoryName: 'Taco Plates',
             isFirstCategory: true,
             foodList: [
               FoodItem(
@@ -162,37 +162,43 @@ Widget build(BuildContext context) {
           key: _keys[1],
           controller: _scrollController,
           index: 1,
-          child: FoodItem(
-            name: 'Burrito',
-            description: 'Choice of protein, rice, beans, and toppings',
-            image: 'assets/images/chronic/burrito.webp',
-            price: 9.95,
-            requiredOptions: [
-              RequiredOption(
-                name: "Pick a Protein",
-                options: ["Carne Asada", "Pollo Asado", "Halal Chicken", "Carnitas", "Vegetarian"],
-                optionPrices: {
-                  "Carne Asada": 1.00,
-                  "Halal Chicken": 1.00,
-                },
-              ),
-              RequiredOption(
-                name: "Pick a Style",
-                options: ["Street Style (+ Lime, Onions, Cilantro, Salsa)", "Gringo Style(+ Lime, Lettuce, Cheese, Salsa)",
-                  "Baja Style (+ Lime, Cabbage, Cheese, Pico de Gallo, Baja Sauce)"],
-                extras: [
-                  ExtraOption(name: "Guacamole", price: 2.25),
-                  ExtraOption(name: "Fajita Veggies", price: 1.00),
-                  ExtraOption(name: "Chips and Salsa", price: 2.25),
-                  ExtraOption(name: "Chips and Guacamole", price: 3.75),
-                  ExtraOption(name: "Churro Bites (8)", price: 3.75),
-                ],
-              ),
-              RequiredOption(
-                name: "Combo Option",
-                options: ["Make it A Combo (Add chips, salsa, and drink)", "No Combo"],
-                extras: [
-                  ExtraOption(name: "Combo (Add chips, salsa, and drink)", price: 3.50),
+          child: FoodCategory(
+            key: _keys[1],
+            categoryName: 'Burritos',
+            foodList: [
+              FoodItem(
+                name: 'Burrito',
+                description: 'Choice of protein, rice, beans, and toppings',
+                image: 'assets/images/chronic/burrito.webp',
+                price: 9.95,
+                requiredOptions: [
+                  RequiredOption(
+                    name: "Pick a Protein",
+                    options: ["Carne Asada", "Pollo Asado", "Halal Chicken", "Carnitas", "Vegetarian"],
+                    optionPrices: {
+                      "Carne Asada": 1.00,
+                      "Halal Chicken": 1.00,
+                    },
+                  ),
+                  RequiredOption(
+                    name: "Pick a Style",
+                    options: ["Street Style (+ Lime, Onions, Cilantro, Salsa)", "Gringo Style(+ Lime, Lettuce, Cheese, Salsa)",
+                      "Baja Style (+ Lime, Cabbage, Cheese, Pico de Gallo, Baja Sauce)"],
+                    extras: [
+                      ExtraOption(name: "Guacamole", price: 2.25),
+                      ExtraOption(name: "Fajita Veggies", price: 1.00),
+                      ExtraOption(name: "Chips and Salsa", price: 2.25),
+                      ExtraOption(name: "Chips and Guacamole", price: 3.75),
+                      ExtraOption(name: "Churro Bites (8)", price: 3.75),
+                    ],
+                  ),
+                  RequiredOption(
+                    name: "Combo Option",
+                    options: ["Make it A Combo (Add chips, salsa, and drink)", "No Combo"],
+                    extras: [
+                      ExtraOption(name: "Combo (Add chips, salsa, and drink)", price: 3.50),
+                    ],
+                  ),
                 ],
               ),
             ],
@@ -202,37 +208,43 @@ Widget build(BuildContext context) {
           key: _keys[2],
           controller: _scrollController,
           index: 2,
-          child: FoodItem(
-            name: 'Bowl-rito',
-            description: 'Choice of protein, rice, beans, and toppings',
-            image: 'assets/images/chronic/burrito2.webp',
-            price: 9.95,
-            requiredOptions: [
-              RequiredOption(
-                name: "Pick a Protein",
-                options: ["Carne Asada", "Pollo Asado", "Halal Chicken", "Carnitas", "Vegetarian"],
-                optionPrices: {
-                  "Carne Asada": 1.00,
-                  "Halal Chicken": 1.00,
-                },
-              ),
-              RequiredOption(
-                name: "Pick a Style",
-                options: ["Street Style (+ Lime, Onions, Cilantro, Salsa)", "Gringo Style(+ Lime, Lettuce, Cheese, Salsa)",
-                  "Baja Style (+ Lime, Cabbage, Cheese, Pico de Gallo, Baja Sauce)"],
-                extras: [
-                  ExtraOption(name: "Guacamole", price: 2.25),
-                  ExtraOption(name: "Fajita Veggies", price: 1.00),
-                  ExtraOption(name: "Chips and Salsa", price: 2.25),
-                  ExtraOption(name: "Chips and Guacamole", price: 3.75),
-                  ExtraOption(name: "Churro Bites (8)", price: 3.75),
-                ],
-              ),
-              RequiredOption(
-                name: "Combo Option",
-                options: ["Make it A Combo (Add chips, salsa, and drink)", "No Combo"],
-                extras: [
-                  ExtraOption(name: "Combo (Add chips, salsa, and drink)", price: 3.50),
+          child: FoodCategory(
+            key: _keys[2],
+            categoryName: 'Bowls',
+            foodList: [
+              FoodItem(
+                name: 'Bowl-rito',
+                description: 'Choice of protein, rice, beans, and toppings',
+                image: 'assets/images/chronic/burrito2.webp',
+                price: 9.95,
+                requiredOptions: [
+                  RequiredOption(
+                    name: "Pick a Protein",
+                    options: ["Carne Asada", "Pollo Asado", "Halal Chicken", "Carnitas", "Vegetarian"],
+                    optionPrices: {
+                      "Carne Asada": 1.00,
+                      "Halal Chicken": 1.00,
+                    },
+                  ),
+                  RequiredOption(
+                    name: "Pick a Style",
+                    options: ["Street Style (+ Lime, Onions, Cilantro, Salsa)", "Gringo Style(+ Lime, Lettuce, Cheese, Salsa)",
+                      "Baja Style (+ Lime, Cabbage, Cheese, Pico de Gallo, Baja Sauce)"],
+                    extras: [
+                      ExtraOption(name: "Guacamole", price: 2.25),
+                      ExtraOption(name: "Fajita Veggies", price: 1.00),
+                      ExtraOption(name: "Chips and Salsa", price: 2.25),
+                      ExtraOption(name: "Chips and Guacamole", price: 3.75),
+                      ExtraOption(name: "Churro Bites (8)", price: 3.75),
+                    ],
+                  ),
+                  RequiredOption(
+                    name: "Combo Option",
+                    options: ["Make it A Combo (Add chips, salsa, and drink)", "No Combo"],
+                    extras: [
+                      ExtraOption(name: "Combo (Add chips, salsa, and drink)", price: 3.50),
+                    ],
+                  ),
                 ],
               ),
             ],
@@ -242,37 +254,43 @@ Widget build(BuildContext context) {
           key: _keys[3],
           controller: _scrollController,
           index: 3,
-          child: FoodItem(
-            name: 'Quesadilla',
-            description: 'Choice of protein, and include chips and salsa',
-            image: 'assets/images/chronic/ques.webp',
-            price: 10.50,
-            requiredOptions: [
-              RequiredOption(
-                name: "Pick a Protein",
-                options: ["Carne Asada", "Pollo Asado", "Halal Chicken", "Carnitas", "Vegetarian"],
-                optionPrices: {
-                  "Carne Asada": 1.00,
-                  "Halal Chicken": 1.00,
-                },
-              ),
-              RequiredOption(
-                name: "Pick a Style",
-                options: ["Street Style (+ Lime, Onions, Cilantro, Salsa)", "Gringo Style(+ Lime, Lettuce, Cheese, Salsa)",
-                  "Baja Style (+ Lime, Cabbage, Cheese, Pico de Gallo, Baja Sauce)"],
-                extras: [
-                  ExtraOption(name: "Guacamole", price: 2.25),
-                  ExtraOption(name: "Fajita Veggies", price: 1.00),
-                  ExtraOption(name: "Chips and Salsa", price: 2.25),
-                  ExtraOption(name: "Chips and Guacamole", price: 3.75),
-                  ExtraOption(name: "Churro Bites (8)", price: 3.75),
-                ],
-              ),
-              RequiredOption(
-                name: "Combo Option",
-                options: ["Make it A Combo (Add chips, salsa, and drink)", "No Combo"],
-                extras: [
-                  ExtraOption(name: "Combo (Add chips, salsa, and drink)", price: 3.50),
+          child: FoodCategory(
+            key: _keys[3],
+            categoryName: 'Quesadillas',
+            foodList: [
+              FoodItem(
+                name: 'Quesadilla',
+                description: 'Choice of protein, and include chips and salsa',
+                image: 'assets/images/chronic/ques.webp',
+                price: 10.50,
+                requiredOptions: [
+                  RequiredOption(
+                    name: "Pick a Protein",
+                    options: ["Carne Asada", "Pollo Asado", "Halal Chicken", "Carnitas", "Vegetarian"],
+                    optionPrices: {
+                      "Carne Asada": 1.00,
+                      "Halal Chicken": 1.00,
+                    },
+                  ),
+                  RequiredOption(
+                    name: "Pick a Style",
+                    options: ["Street Style (+ Lime, Onions, Cilantro, Salsa)", "Gringo Style(+ Lime, Lettuce, Cheese, Salsa)",
+                      "Baja Style (+ Lime, Cabbage, Cheese, Pico de Gallo, Baja Sauce)"],
+                    extras: [
+                      ExtraOption(name: "Guacamole", price: 2.25),
+                      ExtraOption(name: "Fajita Veggies", price: 1.00),
+                      ExtraOption(name: "Chips and Salsa", price: 2.25),
+                      ExtraOption(name: "Chips and Guacamole", price: 3.75),
+                      ExtraOption(name: "Churro Bites (8)", price: 3.75),
+                    ],
+                  ),
+                  RequiredOption(
+                    name: "Combo Option",
+                    options: ["Make it A Combo (Add chips, salsa, and drink)", "No Combo"],
+                    extras: [
+                      ExtraOption(name: "Combo (Add chips, salsa, and drink)", price: 3.50),
+                    ],
+                  ),
                 ],
               ),
             ],
@@ -282,37 +300,43 @@ Widget build(BuildContext context) {
           key: _keys[4],
           controller: _scrollController,
           index: 4,
-          child: FoodItem(
-            name: 'Small Burrito',
-            description: 'Choice of protein, rice, beans, and toppings',
-            image: 'assets/images/chronic/burrito2.webp',
-            price: 7.50,
-            requiredOptions: [
-              RequiredOption(
-                name: "Pick a Protein",
-                options: ["Carne Asada", "Pollo Asado", "Halal Chicken", "Carnitas", "Vegetarian"],
-                optionPrices: {
-                  "Carne Asada": 1.00,
-                  "Halal Chicken": 1.00,
-                },
-              ),
-              RequiredOption(
-                name: "Pick a Style",
-                options: ["Street Style (+ Lime, Onions, Cilantro, Salsa)", "Gringo Style(+ Lime, Lettuce, Cheese, Salsa)",
-                  "Baja Style (+ Lime, Cabbage, Cheese, Pico de Gallo, Baja Sauce)"],
-                extras: [
-                  ExtraOption(name: "Guacamole", price: 2.25),
-                  ExtraOption(name: "Fajita Veggies", price: 1.00),
-                  ExtraOption(name: "Chips and Salsa", price: 2.25),
-                  ExtraOption(name: "Chips and Guacamole", price: 3.75),
-                  ExtraOption(name: "Churro Bites (8)", price: 3.75),
-                ],
-              ),
-              RequiredOption(
-                name: "Combo Option",
-                options: ["Make it A Combo (Add chips, salsa, and drink)", "No Combo"],
-                extras: [
-                  ExtraOption(name: "Combo (Add chips, salsa, and drink)", price: 3.50),
+          child: FoodCategory(
+            key: _keys[4],
+            categoryName: 'Small Burritos',
+            foodList: [
+              FoodItem(
+                name: 'Small Burrito',
+                description: 'Choice of protein, rice, beans, and toppings',
+                image: 'assets/images/chronic/burrito2.webp',
+                price: 7.50,
+                requiredOptions: [
+                  RequiredOption(
+                    name: "Pick a Protein",
+                    options: ["Carne Asada", "Pollo Asado", "Halal Chicken", "Carnitas", "Vegetarian"],
+                    optionPrices: {
+                      "Carne Asada": 1.00,
+                      "Halal Chicken": 1.00,
+                    },
+                  ),
+                  RequiredOption(
+                    name: "Pick a Style",
+                    options: ["Street Style (+ Lime, Onions, Cilantro, Salsa)", "Gringo Style(+ Lime, Lettuce, Cheese, Salsa)",
+                      "Baja Style (+ Lime, Cabbage, Cheese, Pico de Gallo, Baja Sauce)"],
+                    extras: [
+                      ExtraOption(name: "Guacamole", price: 2.25),
+                      ExtraOption(name: "Fajita Veggies", price: 1.00),
+                      ExtraOption(name: "Chips and Salsa", price: 2.25),
+                      ExtraOption(name: "Chips and Guacamole", price: 3.75),
+                      ExtraOption(name: "Churro Bites (8)", price: 3.75),
+                    ],
+                  ),
+                  RequiredOption(
+                    name: "Combo Option",
+                    options: ["Make it A Combo (Add chips, salsa, and drink)", "No Combo"],
+                    extras: [
+                      ExtraOption(name: "Combo (Add chips, salsa, and drink)", price: 3.50),
+                    ],
+                  ),
                 ],
               ),
             ],
@@ -322,19 +346,25 @@ Widget build(BuildContext context) {
           key: _keys[5],
           controller: _scrollController,
           index: 5,
-          child: FoodItem(
-            name: 'Drinks',
-            description: 'Feeling Thirsty?',
-            image: 'assets/images/chronic/drinks.webp',
-            price: 0.00,
-            requiredOptions: [
-              RequiredOption(
-                name: "Feeling Thirsty?",
-                options: ["Regular Drink", "Specialty Drink"],
-                optionPrices: {
-                  "Regular Drink": 2.75,
-                  "Specialty Drink": 3.00,
-                },
+          child: FoodCategory(
+            key: _keys[5],
+            categoryName: 'Drinks',
+            foodList: [
+              FoodItem(
+                name: 'Drinks',
+                description: 'Feeling Thirsty?',
+                image: 'assets/images/chronic/drinks.webp',
+                price: 0.00,
+                requiredOptions: [
+                  RequiredOption(
+                    name: "Feeling Thirsty?",
+                    options: ["Regular Drink", "Specialty Drink"],
+                    optionPrices: {
+                      "Regular Drink": 2.75,
+                      "Specialty Drink": 3.00,
+                    },
+                  ),
+                ],
               ),
             ],
           ),
@@ -343,41 +373,44 @@ Widget build(BuildContext context) {
           key: _keys[6],
           controller: _scrollController,
           index: 6,
-          child: FoodItem(
-            name: 'Extras',
-            description: 'A la Carte',
-            image: 'assets/images/chronic/drinks.webp',
-            price: 0.00,
-            requiredOptions: [
-              RequiredOption(
-                name: "Extras",
-                options: ["Chips and Salsa", "Chips and Guacamole", "Churro Bites"],
-                optionPrices: {
-                  "Chips and Salsa": 2.25,
-                  "Chips and Guacamole": 3.75,
-                  "Churro Bites": 3.75,
-                },
+          child: FoodCategory(
+            key: _keys[6],
+            categoryName: 'Extras',
+            foodList: [
+              FoodItem(
+                name: 'Extras',
+                description: 'A la Carte',
+                image: 'assets/images/chronic/drinks.webp',
+                price: 0.00,
+                requiredOptions: [
+                  RequiredOption(
+                    name: "Extras",
+                    options: ["Chips and Salsa", "Chips and Guacamole", "Churro Bites"],
+                    optionPrices: {
+                      "Chips and Salsa": 2.25,
+                      "Chips and Guacamole": 3.75,
+                      "Churro Bites": 3.75,
+                    },
+                  ),
+                ],
               ),
             ],
           ),
         ),
-        
-      ]
-    )
-
-      
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Back to Restaurant List'),
-        ),
+      ],
+    ),
+    bottomNavigationBar: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('Back to Restaurant List'),
       ),
-    );
-  }
+    ),
+  );
 }
+
 
 class FoodCategory extends StatelessWidget {
   final GlobalKey key;
