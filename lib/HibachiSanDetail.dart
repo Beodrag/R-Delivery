@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'cart_page.dart';
 import 'food_item_models.dart';
+import 'cart_model.dart';
 
 class HibachiSanDetail extends StatefulWidget {
   final Map<String, String> restaurant;
@@ -18,7 +21,6 @@ class _HibachiSanDetailState extends State<HibachiSanDetail> with SingleTickerPr
   List<GlobalKey> _keys = List.generate(7, (index) => GlobalKey());
   Timer? _debounce;
   bool _tabChangeByScroll = false;
-
 
   @override
   void initState() {
@@ -42,7 +44,6 @@ class _HibachiSanDetailState extends State<HibachiSanDetail> with SingleTickerPr
           final double viewportTop = _scrollController.position.pixels;
           final double viewportBottom = viewportTop + _scrollController.position.viewportDimension;
 
-          // Check if the item is in the viewport
           if (itemTop <= viewportBottom && (itemTop >= viewportTop || position.dy <= viewportBottom)) {
             final double distance = (viewportTop - itemTop).abs();
             if (distance < closestDistance) {
@@ -62,18 +63,12 @@ class _HibachiSanDetailState extends State<HibachiSanDetail> with SingleTickerPr
     });
   }
 
-
-
-
   void _handleTabSelection() {
     if (_tabController.indexIsChanging && !_tabChangeByScroll) {
-      // User initiated tab change through direct interaction
       _scrollToIndex(_tabController.index);
     }
-    // Always reset the flag after handling tab selection
     _tabChangeByScroll = false;
   }
-
 
   Future _scrollToIndex(int index) async {
     await _scrollController.scrollToIndex(index, preferPosition: AutoScrollPosition.begin);
@@ -88,25 +83,48 @@ class _HibachiSanDetailState extends State<HibachiSanDetail> with SingleTickerPr
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Hibachi-San'),
-        bottom: TabBar(
-          isScrollable: true,
-          controller: _tabController,
-          tabs: [
-            Tab(text: 'Bowl'),
-            Tab(text: 'Plate'),
-            Tab(text: 'Bigger Plate'),
-            Tab(text: 'Family Meal'),
-            Tab(text: 'A La Carte'),
-            Tab(text: 'Drinks'),
-            Tab(text: 'Appetizers and More'),
-          ],
+        backgroundColor: Colors.redAccent,
+        foregroundColor: Colors.white,
+        bottom: PreferredSize(
+          preferredSize: TabBar(
+            isScrollable: true,
+            controller: _tabController,
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.white,
+            tabs: [
+              Tab(text: 'Teppanyaki'),
+              Tab(text: 'Sushi'),
+              Tab(text: 'Appetizers'),
+              Tab(text: 'Beverages'),
+              Tab(text: 'Desserts'),
+              Tab(text: 'Combos'),
+              Tab(text: 'Specials'),
+            ],
+          ).preferredSize,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: TabBar(
+              isScrollable: true,
+              controller: _tabController,
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.white,
+              indicatorSize: TabBarIndicatorSize.tab,
+              tabs: [
+                Tab(text: 'Teppanyaki'),
+                Tab(text: 'Sushi'),
+                Tab(text: 'Appetizers'),
+                Tab(text: 'Beverages'),
+                Tab(text: 'Desserts'),
+                Tab(text: 'Combos'),
+                Tab(text: 'Specials'),
+              ],
+            ),
+          ),
         ),
       ),
       body: ListView(
@@ -118,34 +136,63 @@ class _HibachiSanDetailState extends State<HibachiSanDetail> with SingleTickerPr
             index: 0,
             child: FoodCategory(
               key: _keys[0],
-              categoryName: 'Bowl',
+              categoryName: 'Teppanyaki',
               isFirstCategory: true,
               foodList: [
+                // Example FoodItem, repeat structure for other menu items
                 FoodItem(
-                  name: 'Bowl',
-                  description: 'Any 1 Side & 1 Entree',
-                  image: 'assets/images/panda/bowl.webp',
-                  price: 11.09,
+                  name: 'Chicken Teppanyaki',
+                  description: 'Grilled chicken with vegetables and your choice of rice or noodles',
+                  image: 'assets/images/hibachi_san/teppanyaki.jpg',
+                  price: 12.99,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Side",
+                        options: ["White Rice", "Brown Rice", "Fried Rice", "Noodles"]
+                    ),
+                    RequiredOption(
+                        name: "Sauce",
+                        options: ["Teriyaki", "Soy Sauce", "Spicy Mayo"]
+                    ),
+                  ],
                   extras: [
+                    ExtraOption(name: "Extra Chicken", price: 3.00),
+                    ExtraOption(name: "Add Shrimp", price: 4.00),
                   ],
                 ),
               ],
             ),
           ),
+          // Add more AutoScrollTags for other categories
         ],
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Back to Restaurant List'),
-        ),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CartPage()));
+              },
+              child: Text('Go to Cart'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Back to Restaurant List'),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
+
 
 class FoodCategory extends StatelessWidget {
   final GlobalKey key;
@@ -272,7 +319,34 @@ class FoodOption extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return DialogWithExtras(foodItem: item);
+        return DialogWithExtras(
+          foodItem: item,
+          onAddToCart: (FoodItem addedItem, Map<String, String?> selectedOptions, Map<String, bool> extras) {
+            double totalPrice = addedItem.price;
+
+            // Calculate additional costs for required options
+            addedItem.requiredOptions.forEach((option) {
+              String? selectedOption = selectedOptions[option.name];
+              double? additionalCost = option.optionPrices[selectedOption];
+              if (additionalCost != null) {
+                totalPrice += additionalCost;
+              }
+            });
+
+            // Add the price of selected extras
+            addedItem.extras.forEach((extra) {
+              if (extras[extra.name] == true) {
+                totalPrice += extra.price ?? 0.0;
+              }
+            });
+
+            // Update the price of the item
+            addedItem.price = totalPrice;
+
+            Provider.of<CartModel>(context, listen: false).addItem(addedItem);
+            Navigator.of(context).pop();
+          },
+        );
       },
     );
   }
@@ -281,12 +355,14 @@ class FoodOption extends StatelessWidget {
 
 class DialogWithExtras extends StatefulWidget {
   final FoodItem foodItem;
+  final Function(FoodItem, Map<String, String?>, Map<String, bool>) onAddToCart;
 
-  DialogWithExtras({Key? key, required this.foodItem}) : super(key: key);
+  DialogWithExtras({Key? key, required this.foodItem, required this.onAddToCart}) : super(key: key);
 
   @override
   _DialogWithExtrasState createState() => _DialogWithExtrasState();
 }
+
 
 class _DialogWithExtrasState extends State<DialogWithExtras> {
   late double totalPrice;
@@ -297,6 +373,10 @@ class _DialogWithExtrasState extends State<DialogWithExtras> {
   @override
   void initState() {
     super.initState();
+    initializeSelections();
+  }
+
+  void initializeSelections() {
     totalPrice = widget.foodItem.price;
     widget.foodItem.extras.forEach((extra) {
       extrasSelected[extra.name] = false;
@@ -305,18 +385,27 @@ class _DialogWithExtrasState extends State<DialogWithExtras> {
       selectedRequiredOptions[option.name] = "(Choose an option)";
       showError[option.name] = false;
     });
+    calculateTotalPrice();
   }
 
-  void _updateTotalPrice(String extraName, bool isSelected) {
+  void calculateTotalPrice() {
+    double tempTotal = widget.foodItem.price;
+    widget.foodItem.extras.forEach((extra) {
+      if (extrasSelected[extra.name] == true) {
+        tempTotal += extra.price ?? 0.0;
+      }
+    });
+
+    widget.foodItem.requiredOptions.forEach((option) {
+      String? selectedOption = selectedRequiredOptions[option.name];
+      double? additionalCost = option.optionPrices[selectedOption];
+      if (additionalCost != null) {
+        tempTotal += additionalCost;
+      }
+    });
+
     setState(() {
-      extrasSelected[extraName] = isSelected;
-      totalPrice = widget.foodItem.price;
-      extrasSelected.forEach((name, isSelected) {
-        if (isSelected) {
-          final extra = widget.foodItem.extras.firstWhere((extra) => extra.name == name, orElse: () => ExtraOption(name: '', price: 0.0));
-          totalPrice += extra.price ?? 0.0;
-        }
-      });
+      totalPrice = tempTotal;
     });
   }
 
@@ -328,75 +417,8 @@ class _DialogWithExtrasState extends State<DialogWithExtras> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (widget.foodItem.requiredOptions.isNotEmpty) ...[
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
-                  "Customizations",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              ...widget.foodItem.requiredOptions.map((requiredOption) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (showError[requiredOption.name] == true)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 5),
-                        child: Text(
-                          "Please select an option",
-                          style: TextStyle(color: Colors.red, fontSize: 12),
-                        ),
-                      ),
-                    DropdownButtonFormField<String>(
-                      decoration: InputDecoration(labelText: requiredOption.name),
-                      value: selectedRequiredOptions[requiredOption.name],
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedRequiredOptions[requiredOption.name] = newValue;
-                          showError[requiredOption.name] = newValue == "(Choose an option)";
-                        });
-                      },
-                      items: [DropdownMenuItem<String>(value: "(Choose an option)", child: Text("(Choose an option)"))]
-                        ..addAll(requiredOption.options.map((value) => DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        ))),
-                    ),
-                    SizedBox(height: 10),
-                  ],
-                );
-              }).toList(),
-            ],
-
-            if (widget.foodItem.extras.isNotEmpty) ...[
-              SizedBox(height: widget.foodItem.requiredOptions.isNotEmpty ? 16.0 : 0.0),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
-                  "Extras",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              ...widget.foodItem.extras.map((extra) {
-                return CheckboxListTile(
-                  title: Text("${extra.name} (\$${extra.price?.toStringAsFixed(2)})"),
-                  value: extrasSelected[extra.name],
-                  onChanged: (bool? value) {
-                    setState(() {
-                      extrasSelected[extra.name] = value!;
-                      _updateTotalPrice(extra.name, value);
-                    });
-                  },
-                );
-              }).toList(),
-            ],
+            ...buildRequiredOptions(),
+            ...buildExtrasOptions(),
           ],
         ),
       ),
@@ -404,24 +426,21 @@ class _DialogWithExtrasState extends State<DialogWithExtras> {
         Text("Total: \$${totalPrice.toStringAsFixed(2)}"),
         ElevatedButton(
           onPressed: () {
-            bool canProceed = true;
-            setState(() {
-              for (var option in widget.foodItem.requiredOptions) {
-                if (selectedRequiredOptions[option.name] == "(Choose an option)") {
-                  showError[option.name] = true;
-                  canProceed = false;
-                } else {
-                  showError[option.name] = false;
-                }
-              }
-            });
-
-            if (canProceed) {
-              Navigator.of(context).pop();
+            if (validateRequiredOptions()) {
+              // Update the item with the selected options and extras
+              widget.foodItem.selectedRequiredOptions = selectedRequiredOptions;
+              widget.foodItem.selectedExtras = extrasSelected;
+              Provider.of<CartModel>(context, listen: false).addItem(widget.foodItem.clone());
+              Navigator.of(context).pop(); // Close the dialog
+            } else {
+              // Handle the case where not all required options are selected
+              print('Validation failed, item not added to cart');
             }
           },
+
           child: Text('Add to Cart'),
         ),
+
         TextButton(
           child: Text("Cancel"),
           onPressed: () {
@@ -430,5 +449,87 @@ class _DialogWithExtrasState extends State<DialogWithExtras> {
         ),
       ],
     );
+  }
+
+  List<Widget> buildRequiredOptions() {
+    return widget.foodItem.requiredOptions.map((requiredOption) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (showError[requiredOption.name] == true)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Text(
+                "Please select an option",
+                style: TextStyle(color: Colors.red, fontSize: 12),
+              ),
+            ),
+          DropdownButtonFormField<String>(
+            decoration: InputDecoration(labelText: requiredOption.name),
+            value: selectedRequiredOptions[requiredOption.name],
+            onChanged: (String? newValue) {
+              setState(() {
+                selectedRequiredOptions[requiredOption.name] = newValue;
+                showError[requiredOption.name] = newValue == "(Choose an option)";
+                calculateTotalPrice();
+              });
+            },
+            items: [DropdownMenuItem<String>(value: "(Choose an option)", child: Text("(Choose an option)"))]
+              ..addAll(requiredOption.options.map((option) {
+                double? price = requiredOption.optionPrices[option];
+                String optionText = price != null && price > 0 ? "$option (+\$${price.toStringAsFixed(2)})" : option;
+                return DropdownMenuItem<String>(
+                  value: option,
+                  child: Text(optionText),
+                );
+              })),
+          ),
+          SizedBox(height: 10),
+        ],
+      );
+    }).toList();
+  }
+
+  List<Widget> buildExtrasOptions() {
+    return widget.foodItem.extras.isNotEmpty ? [
+      SizedBox(height: widget.foodItem.requiredOptions.isNotEmpty ? 16.0 : 0.0),
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Text(
+          "Extras",
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      ...widget.foodItem.extras.map((extra) {
+        return CheckboxListTile(
+          title: Text("${extra.name} (\$${extra.price?.toStringAsFixed(2)})"),
+          value: extrasSelected[extra.name],
+          onChanged: (bool? value) {
+            setState(() {
+              extrasSelected[extra.name] = value!;
+              calculateTotalPrice();
+            });
+          },
+        );
+      }).toList(),
+    ] : [];
+  }
+
+  bool validateRequiredOptions() {
+    bool allValid = true;
+    setState(() {
+      for (var option in widget.foodItem.requiredOptions) {
+        if (selectedRequiredOptions[option.name] == "(Choose an option)") {
+          showError[option.name] = true;
+          allValid = false;
+        } else {
+          showError[option.name] = false;
+        }
+      }
+    });
+    return allValid;
   }
 }

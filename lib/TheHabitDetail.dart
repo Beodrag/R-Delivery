@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'cart_page.dart';
 import 'food_item_models.dart';
+import 'cart_model.dart';
 
 class TheHabitDetail extends StatefulWidget {
   final Map<String, String> restaurant;
@@ -18,7 +21,6 @@ class _TheHabitDetailState extends State<TheHabitDetail> with SingleTickerProvid
   List<GlobalKey> _keys = List.generate(11, (index) => GlobalKey());
   Timer? _debounce;
   bool _tabChangeByScroll = false;
-
 
   @override
   void initState() {
@@ -42,7 +44,6 @@ class _TheHabitDetailState extends State<TheHabitDetail> with SingleTickerProvid
           final double viewportTop = _scrollController.position.pixels;
           final double viewportBottom = viewportTop + _scrollController.position.viewportDimension;
 
-          // Check if the item is in the viewport
           if (itemTop <= viewportBottom && (itemTop >= viewportTop || position.dy <= viewportBottom)) {
             final double distance = (viewportTop - itemTop).abs();
             if (distance < closestDistance) {
@@ -62,18 +63,12 @@ class _TheHabitDetailState extends State<TheHabitDetail> with SingleTickerProvid
     });
   }
 
-
-
-
   void _handleTabSelection() {
     if (_tabController.indexIsChanging && !_tabChangeByScroll) {
-      // User initiated tab change through direct interaction
       _scrollToIndex(_tabController.index);
     }
-    // Always reset the flag after handling tab selection
     _tabChangeByScroll = false;
   }
-
 
   Future _scrollToIndex(int index) async {
     await _scrollController.scrollToIndex(index, preferPosition: AutoScrollPosition.begin);
@@ -88,29 +83,55 @@ class _TheHabitDetailState extends State<TheHabitDetail> with SingleTickerProvid
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('The Habit'),
-        bottom: TabBar(
-          isScrollable: true,
-          controller: _tabController,
-          tabs: [
-            Tab(text: 'Charburgers'),
-            Tab(text: 'Signature Sandwiches'),
-            Tab(text: 'Popular Meals'),
-            Tab(text: 'Seasonal Feature'),
-            Tab(text: 'Family Bundles'),
-            Tab(text: 'Fresh Salads'),
-            Tab(text: 'Sides'),
-            Tab(text: 'Kids Favorites'),
-            Tab(text: 'Frozen Treats'),
-            Tab(text: 'Drinks'),
-            Tab(text: 'Signature Sauces')
-          ],
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+        bottom: PreferredSize(
+          preferredSize: TabBar(
+            isScrollable: true,
+            controller: _tabController,
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.white,
+            tabs: [
+              Tab(text: 'Charburgers'),
+              Tab(text: 'Signature Sandwiches'),
+              Tab(text: 'Popular Meals'),
+              Tab(text: 'Seasonal Feature'),
+              Tab(text: 'Family Bundles'),
+              Tab(text: 'Fresh Salads'),
+              Tab(text: 'Sides'),
+              Tab(text: 'Kids Favorites'),
+              Tab(text: 'Frozen Treats'),
+              Tab(text: 'Drinks'),
+              Tab(text: 'Signature Sauces')
+            ],
+          ).preferredSize,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: TabBar(
+              isScrollable: true,
+              controller: _tabController,
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.white,
+              tabs: [
+                Tab(text: 'Charburgers'),
+                Tab(text: 'Signature Sandwiches'),
+                Tab(text: 'Popular Meals'),
+                Tab(text: 'Seasonal Feature'),
+                Tab(text: 'Family Bundles'),
+                Tab(text: 'Fresh Salads'),
+                Tab(text: 'Sides'),
+                Tab(text: 'Kids Favorites'),
+                Tab(text: 'Frozen Treats'),
+                Tab(text: 'Drinks'),
+                Tab(text: 'Signature Sauces')
+              ],
+            ),
+          ),
         ),
       ),
       body: ListView(
@@ -126,18 +147,18 @@ class _TheHabitDetailState extends State<TheHabitDetail> with SingleTickerProvid
               isFirstCategory: true,
               foodList: [
                 FoodItem(
-                name: '#1 Original Charburger',
-                description: 'A seared Impossible patty (a plant-based alternative patty) '
-                    'topped with caramelized onions, crisp lettuce, '
-                    'tomato, pickles, mayo on a toasted bun. ',
-                image: 'assets/images/habit/#1.png',
-                price: 11.09,
-                extras: [
-                  ExtraOption(name: "Cheese", price: 1.00, ),
-                  ExtraOption(name: "Avocado", price: 2.00,),
-                  ExtraOption(name: "Bacon", price: 1.80,),
-                ],
-              ),
+                  name: '#1 Original Charburger',
+                  description: 'A seared Impossible patty (a plant-based alternative patty) '
+                      'topped with caramelized onions, crisp lettuce, '
+                      'tomato, pickles, mayo on a toasted bun. ',
+                  image: 'assets/images/habit/#1.png',
+                  price: 11.09,
+                  extras: [
+                    ExtraOption(name: "Cheese", price: 1.00, ),
+                    ExtraOption(name: "Avocado", price: 2.00,),
+                    ExtraOption(name: "Bacon", price: 1.80,),
+                  ],
+                ),
                 FoodItem(
                   name: '#2 Original Double Char',
                   description: 'Two freshly chargrilled beef patties, caramelized onions,'
@@ -269,15 +290,15 @@ class _TheHabitDetailState extends State<TheHabitDetail> with SingleTickerProvid
                 categoryName: 'Signature Sandwiches',
                 foodList: [
                   FoodItem(
-                  name: 'Spicy Crispy Chicken Sandwich',
-                  description: 'Crispy Chicken breast with white '
-                      'American cheese, house-made coleslaw, pickles, '
-                      'and spicy red pepper sauce on a toasted flaxseed brioche bun ',
-                  image: 'assets/images/habit/crispy_chicken.png',
-                  price: 9.99,
-                  extras: [
-                  ],
-                ),
+                    name: 'Spicy Crispy Chicken Sandwich',
+                    description: 'Crispy Chicken breast with white '
+                        'American cheese, house-made coleslaw, pickles, '
+                        'and spicy red pepper sauce on a toasted flaxseed brioche bun ',
+                    image: 'assets/images/habit/crispy_chicken.png',
+                    price: 9.99,
+                    extras: [
+                    ],
+                  ),
                   FoodItem(
                     name: 'Ahi Tuna Filet',
                     description: 'Line-caught, sushi-grade tuna steak with a teriyaki glaze, '
@@ -343,16 +364,16 @@ class _TheHabitDetailState extends State<TheHabitDetail> with SingleTickerProvid
               categoryName: 'Popular Meals',
               foodList: [
                 FoodItem(
-                name: '#1 Original Charburger Meal',
-                description: 'Our award-winning burger topped with caramelized onions, crisp lettuce, fresh tomato, '
-                    'pickles, and mayo on a toasted bun. Includes fries and a regular drink.',
-                image: 'assets/images/habit/popular_one.png',
-                price: 11.09,
-                extras: [
-                  ExtraOption(name: "Avocado", price: 2.00),
-                  ExtraOption(name: "Bacon", price: 1.80),
-                ],
-              ),
+                  name: '#1 Original Charburger Meal',
+                  description: 'Our award-winning burger topped with caramelized onions, crisp lettuce, fresh tomato, '
+                      'pickles, and mayo on a toasted bun. Includes fries and a regular drink.',
+                  image: 'assets/images/habit/popular_one.png',
+                  price: 11.09,
+                  extras: [
+                    ExtraOption(name: "Avocado", price: 2.00),
+                    ExtraOption(name: "Bacon", price: 1.80),
+                  ],
+                ),
                 FoodItem(
                   name: '#2 Original Double Char Meal',
                   description: 'Two freshly chargrilled beef patties, caramelized onions, crisp lettuce, '
@@ -538,58 +559,73 @@ class _TheHabitDetailState extends State<TheHabitDetail> with SingleTickerProvid
               ],
             ),
           ),
-            AutoScrollTag(
+          AutoScrollTag(
+            key: _keys[5],
+            controller: _scrollController,
+            index: 5,
+            child: FoodCategory(
               key: _keys[5],
-              controller: _scrollController,
-              index: 5,
-              child: FoodCategory(
-                key: _keys[5],
-                categoryName: 'Fresh Salads',
-                foodList: [
-                  FoodItem(
-                    name: 'Santa Barbara Cobb',
-                    description: 'Crisp shredded iceberg and Romaine lettuce, diced tomatoes, avocado, '
-                        'blue cheese crumbles, hickory-smoked bacon, and egg, tossed in our red wine vinaigrette,'
-                        ' topped with chargrilled chicken breast.',
-                    image: 'assets/images/habit/barbara_cobb.png',
-                    price: 10.29,
-                    requiredOptions: [
-                      RequiredOption(
-                        name: "Dressing",
-                        options: ["Ranch", "Italian", "Blue Cheese", "No Dressing"],
-                      ),
-                    ],
-                    extras: [
-                      ExtraOption(name: "Cheese", price: 1.00, ),
-                      ExtraOption(name: "Avocado", price: 2.00,),
-                      ExtraOption(name: "Bacon", price: 1.80,),
-                    ],
-                  ),
-                  FoodItem(
-                    name: 'BBQ Chicken Salad',
-                    description: 'Chargrilled chicken breast atop garden greens, hickory-smoked bacon, diced red onions,'
-                        ' diced tomatoes, cilantro, and ranch dressing, topped with tangy BBQ sauce.',
-                    image: 'assets/images/habit/barbara_cobb.png',
-                    price: 10.29,
-                    extras: [
-                      ExtraOption(name: "Cheese", price: 1.00, ),
-                      ExtraOption(name: "Avocado", price: 2.00,),
-                      ExtraOption(name: "Bacon", price: 1.80,),
-                    ],
-                  ),
-                ],
-              ),
+              categoryName: 'Fresh Salads',
+              foodList: [
+                FoodItem(
+                  name: 'Santa Barbara Cobb',
+                  description: 'Crisp shredded iceberg and Romaine lettuce, diced tomatoes, avocado, '
+                      'blue cheese crumbles, hickory-smoked bacon, and egg, tossed in our red wine vinaigrette,'
+                      ' topped with chargrilled chicken breast.',
+                  image: 'assets/images/habit/barbara_cobb.png',
+                  price: 10.29,
+                  requiredOptions: [
+                    RequiredOption(
+                      name: "Dressing",
+                      options: ["Ranch", "Italian", "Blue Cheese", "No Dressing"],
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Cheese", price: 1.00, ),
+                    ExtraOption(name: "Avocado", price: 2.00,),
+                    ExtraOption(name: "Bacon", price: 1.80,),
+                  ],
+                ),
+                FoodItem(
+                  name: 'BBQ Chicken Salad',
+                  description: 'Chargrilled chicken breast atop garden greens, hickory-smoked bacon, diced red onions,'
+                      ' diced tomatoes, cilantro, and ranch dressing, topped with tangy BBQ sauce.',
+                  image: 'assets/images/habit/barbara_cobb.png',
+                  price: 10.29,
+                  extras: [
+                    ExtraOption(name: "Cheese", price: 1.00, ),
+                    ExtraOption(name: "Avocado", price: 2.00,),
+                    ExtraOption(name: "Bacon", price: 1.80,),
+                  ],
+                ),
+              ],
+            ),
           ),
+          // Add more AutoScrollTags for other categories
         ],
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Back to Restaurant List'),
-        ),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CartPage()));
+              },
+              child: Text('Go to Cart'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Back to Restaurant List'),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -608,7 +644,6 @@ class FoodCategory extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // If this is the first category, display the image and restaurant name
         if (isFirstCategory) ...[
           Image.asset(
             'assets/images/the_habit.jpg',
@@ -620,17 +655,11 @@ class FoodCategory extends StatelessWidget {
           Center(
             child: Text(
               'The Habit',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(height: 16.0),
         ],
-
-        // Category title
         Padding(
           padding: EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
@@ -638,20 +667,14 @@ class FoodCategory extends StatelessWidget {
             style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
           ),
         ),
-
-        // Food items in this category
         Column(
-          children: foodList.map((foodItem) {
-            return FoodOption(foodItem: foodItem);
-          }).toList(),
+          children: foodList.map((foodItem) => FoodOption(foodItem: foodItem)).toList(),
         ),
-
         SizedBox(height: 16.0),
       ],
     );
   }
 }
-
 
 class FoodOption extends StatelessWidget {
   final FoodItem foodItem;
@@ -667,16 +690,14 @@ class FoodOption extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
-            // Display the food image on the left
             Expanded(
               flex: 2,
               child: Image.asset(
                 foodItem.image,
                 fit: BoxFit.contain,
-                height: 100.0, // You can adjust the height of the food image
+                height: 100.0,
               ),
             ),
-            // Display the food name and description on the right
             Expanded(
               flex: 3,
               child: Padding(
@@ -684,28 +705,11 @@ class FoodOption extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      foodItem.name,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    Text(foodItem.name, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
                     SizedBox(height: 8.0),
-                    Text(
-                      foodItem.description,
-                      style: TextStyle(
-                        fontSize: 14.0,
-                      ),
-                    ),
+                    Text(foodItem.description, style: TextStyle(fontSize: 14.0)),
                     SizedBox(height: 8.0),
-                    Text(
-                      "\$${foodItem.price.toStringAsFixed(2)}",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    Text("\$${foodItem.price.toStringAsFixed(2)}", style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
                   ],
                 ),
               ),
@@ -725,7 +729,6 @@ class FoodOption extends StatelessWidget {
     );
   }
 }
-
 
 class DialogWithExtras extends StatefulWidget {
   final FoodItem foodItem;
@@ -753,18 +756,27 @@ class _DialogWithExtrasState extends State<DialogWithExtras> {
       selectedRequiredOptions[option.name] = "(Choose an option)";
       showError[option.name] = false;
     });
+    calculateTotalPrice();
   }
 
-  void _updateTotalPrice(String extraName, bool isSelected) {
+  void calculateTotalPrice() {
+    double tempTotal = widget.foodItem.price;
+    widget.foodItem.extras.forEach((extra) {
+      if (extrasSelected[extra.name] == true) {
+        tempTotal += extra.price ?? 0.0;
+      }
+    });
+
+    widget.foodItem.requiredOptions.forEach((option) {
+      String? selectedOption = selectedRequiredOptions[option.name];
+      double? additionalCost = option.optionPrices[selectedOption];
+      if (additionalCost != null) {
+        tempTotal += additionalCost;
+      }
+    });
+
     setState(() {
-      extrasSelected[extraName] = isSelected;
-      totalPrice = widget.foodItem.price;
-      extrasSelected.forEach((name, isSelected) {
-        if (isSelected) {
-          final extra = widget.foodItem.extras.firstWhere((extra) => extra.name == name, orElse: () => ExtraOption(name: '', price: 0.0));
-          totalPrice += extra.price ?? 0.0;
-        }
-      });
+      totalPrice = tempTotal;
     });
   }
 
@@ -776,75 +788,8 @@ class _DialogWithExtrasState extends State<DialogWithExtras> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (widget.foodItem.requiredOptions.isNotEmpty) ...[
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
-                  "Customizations",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              ...widget.foodItem.requiredOptions.map((requiredOption) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (showError[requiredOption.name] == true)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 5),
-                        child: Text(
-                          "Please select an option",
-                          style: TextStyle(color: Colors.red, fontSize: 12),
-                        ),
-                      ),
-                    DropdownButtonFormField<String>(
-                      decoration: InputDecoration(labelText: requiredOption.name),
-                      value: selectedRequiredOptions[requiredOption.name],
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedRequiredOptions[requiredOption.name] = newValue;
-                          showError[requiredOption.name] = newValue == "(Choose an option)";
-                        });
-                      },
-                      items: [DropdownMenuItem<String>(value: "(Choose an option)", child: Text("(Choose an option)"))]
-                        ..addAll(requiredOption.options.map((value) => DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        ))),
-                    ),
-                    SizedBox(height: 10),
-                  ],
-                );
-              }).toList(),
-            ],
-
-            if (widget.foodItem.extras.isNotEmpty) ...[
-              SizedBox(height: widget.foodItem.requiredOptions.isNotEmpty ? 16.0 : 0.0),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
-                  "Extras",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              ...widget.foodItem.extras.map((extra) {
-                return CheckboxListTile(
-                  title: Text("${extra.name} (\$${extra.price?.toStringAsFixed(2)})"),
-                  value: extrasSelected[extra.name],
-                  onChanged: (bool? value) {
-                    setState(() {
-                      extrasSelected[extra.name] = value!;
-                      _updateTotalPrice(extra.name, value);
-                    });
-                  },
-                );
-              }).toList(),
-            ],
+            ...buildRequiredOptions(),
+            ...buildExtrasOptions(),
           ],
         ),
       ),
@@ -852,20 +797,13 @@ class _DialogWithExtrasState extends State<DialogWithExtras> {
         Text("Total: \$${totalPrice.toStringAsFixed(2)}"),
         ElevatedButton(
           onPressed: () {
-            bool canProceed = true;
-            setState(() {
-              for (var option in widget.foodItem.requiredOptions) {
-                if (selectedRequiredOptions[option.name] == "(Choose an option)") {
-                  showError[option.name] = true;
-                  canProceed = false;
-                } else {
-                  showError[option.name] = false;
-                }
-              }
-            });
-
-            if (canProceed) {
+            if (validateRequiredOptions()) {
+              widget.foodItem.selectedRequiredOptions = selectedRequiredOptions;
+              widget.foodItem.selectedExtras = extrasSelected;
+              Provider.of<CartModel>(context, listen: false).addItem(widget.foodItem.clone());
               Navigator.of(context).pop();
+            } else {
+              print('Validation failed, item not added to cart');
             }
           },
           child: Text('Add to Cart'),
@@ -878,5 +816,87 @@ class _DialogWithExtrasState extends State<DialogWithExtras> {
         ),
       ],
     );
+  }
+
+  List<Widget> buildRequiredOptions() {
+    return widget.foodItem.requiredOptions.map((requiredOption) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (showError[requiredOption.name] == true)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Text(
+                "Please select an option",
+                style: TextStyle(color: Colors.red, fontSize: 12),
+              ),
+            ),
+          DropdownButtonFormField<String>(
+            decoration: InputDecoration(labelText: requiredOption.name),
+            value: selectedRequiredOptions[requiredOption.name],
+            onChanged: (String? newValue) {
+              setState(() {
+                selectedRequiredOptions[requiredOption.name] = newValue;
+                showError[requiredOption.name] = newValue == "(Choose an option)";
+                calculateTotalPrice();
+              });
+            },
+            items: [DropdownMenuItem<String>(value: "(Choose an option)", child: Text("(Choose an option)"))]
+              ..addAll(requiredOption.options.map((option) {
+                double? price = requiredOption.optionPrices[option];
+                String optionText = price != null && price > 0 ? "$option (+\$${price.toStringAsFixed(2)})" : option;
+                return DropdownMenuItem<String>(
+                  value: option,
+                  child: Text(optionText),
+                );
+              })),
+          ),
+          SizedBox(height: 10),
+        ],
+      );
+    }).toList();
+  }
+
+  List<Widget> buildExtrasOptions() {
+    return widget.foodItem.extras.isNotEmpty ? [
+      SizedBox(height: widget.foodItem.requiredOptions.isNotEmpty ? 16.0 : 0.0),
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Text(
+          "Extras",
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      ...widget.foodItem.extras.map((extra) {
+        return CheckboxListTile(
+          title: Text("${extra.name} (\$${extra.price?.toStringAsFixed(2)})"),
+          value: extrasSelected[extra.name],
+          onChanged: (bool? value) {
+            setState(() {
+              extrasSelected[extra.name] = value!;
+              calculateTotalPrice();
+            });
+          },
+        );
+      }).toList(),
+    ] : [];
+  }
+
+  bool validateRequiredOptions() {
+    bool allValid = true;
+    setState(() {
+      for (var option in widget.foodItem.requiredOptions) {
+        if (selectedRequiredOptions[option.name] == "(Choose an option)") {
+          showError[option.name] = true;
+          allValid = false;
+        } else {
+          showError[option.name] = false;
+        }
+      }
+    });
+    return allValid;
   }
 }

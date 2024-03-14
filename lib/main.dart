@@ -13,7 +13,6 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Wrapping MaterialApp with ChangeNotifierProvider
     return ChangeNotifierProvider(
       create: (context) => CartModel(),
       child: MaterialApp(
@@ -76,7 +75,6 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
                 children: <Widget>[
                   ElevatedButton(
                     onPressed: () {
-                      // Navigate to the restaurant list page
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => RestaurantList()),
