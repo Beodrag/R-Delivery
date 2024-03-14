@@ -97,13 +97,14 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white,
             tabs: [
-              Tab(text: 'Bowls'),
-              Tab(text: 'Gyros'),
-              Tab(text: 'Platters'),
-              Tab(text: 'Salads'),
-              Tab(text: 'Sides'),
-              Tab(text: 'Drinks'),
-              Tab(text: 'Desserts'),
+              Tab(text: 'Breakfast Bundle'),
+              Tab(text: 'Food|Baked Goods'),
+              Tab(text: 'Food|Breakfast'),
+              Tab(text: 'Food|Lunch'),
+              Tab(text: 'Coffee|Brewed Coffee'),
+              Tab(text: 'Coffee|Iced Coffee'),
+              Tab(text: 'Coffee|Iced Espresso'),
+
             ],
           ).preferredSize,
           child: Align(
@@ -115,13 +116,14 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
               unselectedLabelColor: Colors.white,
               indicatorSize: TabBarIndicatorSize.tab,
               tabs: [
-                Tab(text: 'Bowls'),
-                Tab(text: 'Gyros'),
-                Tab(text: 'Platters'),
-                Tab(text: 'Salads'),
-                Tab(text: 'Sides'),
-                Tab(text: 'Drinks'),
-                Tab(text: 'Desserts'),
+                Tab(text: 'Breakfast Bundle'),
+                Tab(text: 'Food|Baked Goods'),
+                Tab(text: 'Food|Breakfast'),
+                Tab(text: 'Food|Lunch'),
+                Tab(text: 'Coffee|Brewed Coffee'),
+                Tab(text: 'Coffee|Iced Coffee'),
+                Tab(text: 'Coffee|Iced Espresso'),
+
               ],
             ),
           ),
@@ -136,34 +138,771 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
             index: 0,
             child: FoodCategory(
               key: _keys[0],
-              categoryName: 'Bowls',
+              categoryName: 'Breakfast Bundle',
               isFirstCategory: true,
               foodList: [
                 // Example FoodItem, repeat structure for other menu items
                 FoodItem(
-                  name: 'Chicken Shawarma Bowl',
-                  description: 'Grilled chicken shawarma served over rice with your choice of toppings',
-                  image: 'assets/images/halal_shack/shawarma_bowl.jpg',
-                  price: 9.99,
-                  requiredOptions: [
-                    RequiredOption(
-                        name: "Base",
-                        options: ["Rice", "Salad", "Fries"]
-                    ),
-                    RequiredOption(
-                        name: "Toppings",
-                        options: ["Lettuce", "Tomatoes", "Onions", "Olives"]
-                    ),
-                  ],
+                  name: 'Breakfast Bundle',
+                  description: 'Small Brewed Coffee and a Plain Bagel with Cream Cheese for 5 dollars',
+                  image: 'assets/images/coffeeBean/BagelBundle.jpg',
+                  price: 5.00,
                   extras: [
-                    ExtraOption(name: "Extra Meat", price: 2.50),
-                    ExtraOption(name: "Falafel", price: 1.50),
+                    ExtraOption(name: "Espresso Shot", price: 1.00),
                   ],
                 ),
               ],
             ),
           ),
           // Add more AutoScrollTags for other categories
+          AutoScrollTag(
+            key: _keys[0],
+            controller: _scrollController,
+            index: 0,
+            child: FoodCategory(
+              key: _keys[0],
+              categoryName: 'Food|Baked Goods',
+              isFirstCategory: true,
+              foodList: [
+                // Example FoodItem, repeat structure for other menu items
+                FoodItem(
+                  name: 'Bagels & Spreads|Cheese Jalapeno Bagel',
+                  description: 'A classic New York-style bagel with a delicious combination of cheese and jalapeño. Ask for it toasted and/or with cream cheese. This has not been Kosher certified. 290 Calories',
+                  image: 'assets/images/coffeeBean/BagelCheJalapeno.jpg',
+                  price: 2.75,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Would you like this item Oven Toasted?",
+                        options: ["Oven Toasted", "Not Warmed"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Cream Cheese", price: 1.00)
+                  ],
+                ),
+            FoodItem(
+              name: 'Bagels & Spreads|Everything Bagel',
+              description: 'A classic New York-style bagel with a delicious combination of cheese and jalapeño. Ask for it toasted and/or with cream cheese. This has not been Kosher certified. 290 Calories',
+              image: 'assets/images/coffeeBean/everythingbagel.jpg',
+              price: 2.45,
+              requiredOptions: [
+                RequiredOption(
+                    name: "Would you like this item Oven Toasted?",
+                    options: ["Oven Toasted", "Not Warmed"]
+                ),
+              ],
+              extras: [
+                ExtraOption(name: "Cream Cheese", price: 1.00)
+              ],
+            ),
+                FoodItem(
+                  name: 'Bagels & Spreads|Plain Bagel',
+                  description: 'A classic New York-style bagel with a delicious combination of cheese and jalapeño. Ask for it toasted and/or with cream cheese. This has not been Kosher certified. 290 Calories',
+                  image: 'assets/images/coffeeBean/plainbagel.jpg',
+                  price: 2.45,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Would you like this item Oven Toasted?",
+                        options: ["Oven Toasted", "Not Warmed"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Cream Cheese", price: 1.00)
+                  ],
+                ),
+
+              ],
+            ),
+          ),
+         AutoScrollTag(
+            key: _keys[0],
+            controller: _scrollController,
+            index: 0,
+            child: FoodCategory(
+              key: _keys[0],
+              categoryName: 'Food|Baked Goods',
+              isFirstCategory: true,
+              foodList: [
+                // Example FoodItem, repeat structure for other menu items
+                FoodItem(
+                  name: 'Cakes & Cake Pops|Strawberry Cake Pop',
+                  description: 'A delicious strawberry flavored cake pop dipped in pink chocolate coating and rainbow sprinkles. 150 Calories',
+                  image: 'assets/images/coffeeBean/StrawberryCakePop.jpg',
+                  price: 2.95,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Would you like Utensils?",
+                        options: ["Yes", "No"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Cream Cheese", price: 1.00)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Cakes & Cake Pops|Chocolate Cake Pop',
+                  description: 'A delicious chocolate flavored cake pop dipped in dark chocolate coating and rainbow sprinkles. 150 Calories',
+                  image: 'assets/images/coffeeBean/ChocoCakePop.jpg',
+                  price: 2.95,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Would you like Utensils?",
+                        options: ["Yes", "No"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Cream Cheese", price: 1.00)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Cakes & Cake Pops|Coffee Crumble Cake',
+                  description: 'A classic coffee cake with swirled cinnamon sugar and topped with a crunchy streusel topping. This has not been Kosher certified. 350 Calories',
+                  image: 'assets/images/coffeeBean/CoffeeCrumble.jpg',
+                  price: 3.25,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Would you like this item Oven Toasted?",
+                        options: ["Oven Toasted", "Not Warmed"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Utensils", price: 0.00)
+                  ],
+                ),
+              ],
+            ),
+          ),
+          AutoScrollTag(
+            key: _keys[0],
+            controller: _scrollController,
+            index: 0,
+            child: FoodCategory(
+              key: _keys[0],
+              categoryName: 'Food|Breakfast',
+              isFirstCategory: true,
+              foodList: [
+                // Example FoodItem, repeat structure for other menu items
+                FoodItem(
+                  name: 'Breakfast|Bacon Egg Bites',
+                  description: 'Scrambled eggs with Jack Cheese, Swiss Cheese, Potato, & Bacon. 220 Calories',
+                  image: 'assets/images/coffeeBean/BaconEggBites.jpg',
+                  price: 4.95,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Would you like this item Oven Toasted?",
+                        options: ["Oven Toasted", "Not Warmed"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Hot sauce?", price: 0.00)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Breakfast|Beyond Breakfast Sausage Sandwich',
+                  description: 'Cage-free egg, melted provolone cheese & plant-based Beyond Breakfast Sausage® on a toasted English muffin. 400 Calories',
+                  image: 'assets/images/coffeeBean/BaconEggCheese.jpg',
+                  price: 5.95,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Would you like this item Oven Toasted?",
+                        options: ["Oven Toasted", "Not Warmed"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Hot sauce?", price: 0.00)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Breakfast|Egg White & Veggie Bites',
+                  description: 'Egg whites scrambled with marinated Red Bell Peppers, Mushrooms & Spinach, Jack, Swiss & Gruyere cheeses. 110 Calories',
+                  image: 'assets/images/coffeeBean/EggWhiteVeggie.jpg',
+                  price: 4.95,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Would you like this item Oven Toasted?",
+                        options: ["Oven Toasted", "Not Warmed"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Hot sauce?", price: 0.00)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Breakfast|Bacon Egg Cheese English Muffin',
+                  description: 'Crispy bacon and fried egg topped with melted cheddar cheese on a toasted English Muffin. 400 Calories',
+                  image: 'assets/images/coffeeBean/BaconEggCheese.jpg',
+                  price: 5.50,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Would you like this item Oven Toasted?",
+                        options: ["Oven Toasted", "Not Warmed"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Hot sauce?", price: 0.00)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Breakfast|Ham Egg and Cheese Brioche ',
+                  description: 'A buttery brioche bun filled with fluffy eggs, black forest ham and cheddar cheese. 400 Calories',
+                  image: 'assets/images/coffeeBean/HamEggCheese.jpg',
+                  price: 5.95,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Would you like this item Oven Toasted?",
+                        options: ["Oven Toasted", "Not Warmed"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Hot sauce?", price: 0.00)
+                  ],
+                ),
+              ],
+            ),
+          ),
+         AutoScrollTag(
+            key: _keys[0],
+            controller: _scrollController,
+            index: 0,
+            child: FoodCategory(
+              key: _keys[0],
+              categoryName: 'Food|Lunch',
+              isFirstCategory: true,
+              foodList: [
+                // Example FoodItem, repeat structure for other menu items
+                FoodItem(
+                  name: 'Sandwiches & Wraps|Caprese Sandwich ',
+                  description: 'Sun blushed tomatoes, mozzarella, spinach and pesto dressing on an artisan roll. This has not been Kosher certified. 620 Calories',
+                  image: 'assets/images/coffeeBean/Caprese Sandwich.jpg',
+                  price: 6.75,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Would you like this item Oven Toasted?",
+                        options: ["Oven Toasted", "Not Warmed"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Hot sauce?", price: 0.00)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Sandwiches & Wraps|Homestyle Grilled Cheese Sandwich ',
+                  description: 'A classic grilled cheese made with mild cheddar and Monterey Jack cheese. Oven toasted to perfection.',
+                  image: 'assets/images/coffeeBean/Grilled-Cheese.jpg',
+                  price: 3.95,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Would you like this item Oven Toasted?",
+                        options: ["Oven Toasted", "Not Warmed"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Hot sauce?", price: 0.00)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Sandwiches & Wraps|Turkey Pesto Sandwich',
+                  description: 'Turkey Pesto with provolone cheese, tomato and spinach on a ciabatta bun. Great cold or warmed up! 620 Calories',
+                  image: 'assets/images/coffeeBean/TurkeyPesto.jpg',
+                  price: 6.95,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Would you like this item Oven Toasted?",
+                        options: ["Oven Toasted", "Not Warmed"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Hot sauce?", price: 0.00)
+                  ],
+                ),
+              ],
+            ),
+          ),
+          AutoScrollTag(
+            key: _keys[0],
+            controller: _scrollController,
+            index: 0,
+            child: FoodCategory(
+              key: _keys[0],
+              categoryName: 'Coffee|Brewed Coffee',
+              isFirstCategory: true,
+              foodList: [
+                // Example FoodItem, repeat structure for other menu items
+                FoodItem(
+                  name: 'Brewed Coffee',
+                  description: 'One of our light, medium, dark, or decaffeinated brews of the day, brewed from only the top 1% of Arabica beans in the world.',
+                  image: 'assets/images/coffeeBean/BrewedCoffee.jpg',
+                  price: 6.75,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+                    RequiredOption(
+                        name: "Choose Roast",
+                        options: ["Light/Medium Roast", "Dark/Distinctive Roast"]
+                    ),
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Cafe Au lait',
+                  description: 'Our light roast coffee with steamed whole milk and topped with thick velvety foam.',
+                  image: 'assets/images/coffeeBean/CafeAuLait.jpg',
+                  price: 3.58,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+                    RequiredOption(
+                        name: "Choose Roast",
+                        options: ["Light/Medium Roast", "Dark/Distinctive Roast"]
+                    ),
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Cafe Caramel',
+                  description: 'Our light roast coffee with steamed whole milk and topped with thick velvety foam.',
+                  image: 'assets/images/coffeeBean/CafeCaramel.jpg',
+                  price: 4.38,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+                    RequiredOption(
+                        name: "Choose Roast",
+                        options: ["Light/Medium Roast", "Dark/Distinctive Roast"]
+                    ),
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Cafe Cookie Butter',
+                  description: 'Our light roast coffee with our sweet and spicy cookie butter powder, steamed non-fat milk and topped with thick foam.',
+                  image: 'assets/images/coffeeBean/CafeCookieButter.jpg',
+                  price: 4.58,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+                    RequiredOption(
+                        name: "Choose Roast",
+                        options: ["Light/Medium Roast", "Dark/Distinctive Roast"]
+                    ),
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Cafe Dark Chocolate ',
+                  description: 'Our light roast coffee with our dark chocolate powder, steamed non-fat milk and topped with thick foam.',
+                  image: 'assets/images/coffeeBean/CafeDarkChocolate.jpg',
+                  price: 4.38,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+                    RequiredOption(
+                        name: "Choose Roast",
+                        options: ["Light/Medium Roast", "Dark/Distinctive Roast"]
+                    ),
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80)
+                  ],
+                ),
+
+              ],
+            ),
+          ),
+          AutoScrollTag(
+            key: _keys[0],
+            controller: _scrollController,
+            index: 0,
+            child: FoodCategory(
+              key: _keys[0],
+              categoryName: 'Coffee|Iced Coffee',
+              isFirstCategory: true,
+              foodList: [
+                // Example FoodItem, repeat structure for other menu items
+                FoodItem(
+                  name: 'Iced Coffee',
+                  description: 'Our specially brewed coffee served over ice for a refreshing and bold coffee taste.',
+                  image: 'assets/images/coffeeBean/Iced-Coffee.jpg',
+                  price: 3.88,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80),
+                    ExtraOption(name: "Add Cream Cap", price: 0.95)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Iced Coffees|Caramel Iced Coffee',
+                  description: 'Our premium espresso shots blended with caramel sauce, French Deluxe™ vanilla powder, and served over ice for a refreshing and delicious caramel coffee drink.',
+                  image: 'assets/images/coffeeBean/CaramelIcedCoffee.jpg',
+                  price: 4.68,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80),
+                    ExtraOption(name: "Add Cream Cap?", price: 0.95)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Iced Coffees|Cookie Butter Iced Coffee',
+                  description: 'Our premium espresso shots blended with our sweet and spicy cookie butter powder and served over ice for a refreshing and delicious cookie butter coffee drink.',
+                  image: 'assets/images/coffeeBean/CookieButterIcedCoffee.jpg',
+                  price: 4.88,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80),
+                    ExtraOption(name: "Add Cream Cap?", price: 0.95)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Iced Coffees|Dark Chocolate Iced Coffee',
+                  description: 'Our premium espresso shots blended with our dark chocolate powder and served over ice for a refreshing and delicious chocolate and coffee drink.',
+                  image: 'assets/images/coffeeBean/DarkChocoIcedCoffee.jpg',
+                  price: 4.68,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80),
+                    ExtraOption(name: "Add Cream Cap?", price: 0.95)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Iced Coffees|Hazelnut Iced Coffee',
+                  description: 'Our premium espresso shots blended with our specially developed hazelnut powder and served over ice for a refreshing and delicious hazelnut coffee drink.',
+                  image: 'assets/images/coffeeBean/hazlenutIcedCoffee.jpg',
+                  price: 4.68,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80),
+                    ExtraOption(name: "Add Cream Cap?", price: 0.95)
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          AutoScrollTag(
+            key: _keys[0],
+            controller: _scrollController,
+            index: 0,
+            child: FoodCategory(
+              key: _keys[0],
+              categoryName: 'Coffee|Iced Espresso',
+              isFirstCategory: true,
+              foodList: [
+                // Example FoodItem, repeat structure for other menu items
+                FoodItem(
+                  name: 'Iced Lattes|Iced Salted Caramel Mocha Latte',
+                  description: 'Our signature espresso highlighted by a rich, buttery caramel flavor and Special Dutch chocolate powder and served over ice to create a delicious beverage that is good any time of day.',
+                  image: 'assets/images/coffeeBean/IcedSaltedCaramel.jpg',
+                  price: 5.38,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80),
+                    ExtraOption(name: "Add Cream Cap", price: 0.95),
+                    ExtraOption(name: "Lighten Your Drink?", price: 0.00)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Iced Lattes|Iced Latte',
+                  description: 'Freshly pulled shots of espresso and whole milk served over ice.',
+                  image: 'assets/images/coffeeBean/IcedLatte.jpg',
+                  price: 4.48,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80),
+                    ExtraOption(name: "Add Cream Cap", price: 0.95),
+                    ExtraOption(name: "Lighten Your Drink?", price: 0.00)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Iced Lattes|Vanilla Iced Latte',
+                  description: 'Freshly pulled shots of espresso with our French Deluxe™ vanilla powder and non-fat milk over ice.',
+                  image: 'assets/images/coffeeBean/VanillaIcedLatte.jpg',
+                  price: 5.18,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80),
+                    ExtraOption(name: "Add Cream Cap", price: 0.95),
+                    ExtraOption(name: "Lighten Your Drink?", price: 0.00)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Iced Lattes|Mocha Iced Latte',
+                  description: 'Freshly pulled shots of espresso with Special Dutch™ chocolate powder and non-fat milk over ice.',
+                  image: 'assets/images/coffeeBean/MochaIcedlatte.jpg',
+                  price: 5.18,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80),
+                    ExtraOption(name: "Add Cream Cap", price: 0.95),
+                    ExtraOption(name: "Lighten Your Drink?", price: 0.00)
+                  ],
+                ),
+                FoodItem(
+                  name: 'Iced Lattes|White Chocolate Iced Latte',
+                  description: 'Freshly pulled shots of espresso with our White Chocolate powder and non-fat milk over ice.',
+                  image: 'assets/images/coffeeBean/WhiteChocolateIcedLatte.jpg',
+                  price: 5.18,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Choose size",
+                        options: ["Small", "Regular", "Large"]
+                    ),
+                    RequiredOption(
+                        name: "Creamer",
+                        options: ["Whole Milk", "Non-Fat Milk", "Half & Half", "Almond Milk", "Oat Milk", "Heavy Creamer", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Sweetener",
+                        options: ["Add White Sugar", "Add Raw Sugar", "Add Sucralose Sweetener", "Add Stevia", "Side of Honey Sticks", "None"]
+                    ),
+                    RequiredOption(
+                        name: "Whipped Cream",
+                        options: ["With Whipped Cream", "Easy Whipped Cream", "Add Mint Whipped Cream"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Add Shot?", price: 0.80),
+                    ExtraOption(name: "Add Cream Cap", price: 0.95),
+                    ExtraOption(name: "Lighten Your Drink?", price: 0.00)
+                  ],
+                ),
+              ],
+            ),
+          ),
         ],
       ),
       bottomNavigationBar: Column(
