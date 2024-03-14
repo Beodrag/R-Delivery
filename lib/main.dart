@@ -4,16 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'dart:convert';
+import 'cart_model.dart';
 import 'restaurant_list.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Food Robot Delivery',
-      home: AddressSelectionPage(),
+    // Wrapping MaterialApp with ChangeNotifierProvider
+    return ChangeNotifierProvider(
+      create: (context) => CartModel(),
+      child: MaterialApp(
+        title: 'Food Robot Delivery',
+        home: AddressSelectionPage(),
+      ),
     );
   }
 }
@@ -100,6 +106,8 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Select Delivery Location'),
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
         ),
         body: Stack(
           children: <Widget>[
@@ -109,14 +117,15 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
                 center: _initialCenter,
                 zoom: 16.0,
                 minZoom: 16.0,
-                maxZoom: 18.0, // Set the maximum zoom level to 18
+                maxZoom: 18.0,
                 interactiveFlags: InteractiveFlag.pinchZoom | InteractiveFlag.drag,
               ),
-              layers: [
-                TileLayerOptions(
+              children: [
+                TileLayer(
                   urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                   subdomains: ['a', 'b', 'c'],
                 ),
+                // Add other layers or widgets here
               ],
             ),
             Center(
@@ -131,6 +140,7 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
                 child: Text('Confirm Address'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                   textStyle: TextStyle(fontSize: 16),
                 ),
@@ -142,5 +152,3 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
     );
   }
 }
-
-

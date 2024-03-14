@@ -1,6 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'cart_page.dart';
+import 'food_item_models.dart';
+import 'cart_model.dart';
 
 class PandaExpressDetail extends StatefulWidget {
   final Map<String, String> restaurant;
@@ -94,18 +98,43 @@ class _PandaExpressDetailState extends State<PandaExpressDetail> with SingleTick
     return Scaffold(
       appBar: AppBar(
         title: Text('Panda Express'),
-        bottom: TabBar(
-          isScrollable: true,
-          controller: _tabController,
-          tabs: [
-            Tab(text: 'Bowl'),
-            Tab(text: 'Plate'),
-            Tab(text: 'Bigger Plate'),
-            Tab(text: 'Family Meal'),
-            Tab(text: 'A La Carte'),
-            Tab(text: 'Drinks'),
-            Tab(text: 'Appetizers and More'),
-          ],
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+        bottom: PreferredSize(
+          preferredSize: TabBar(
+            isScrollable: true,
+            controller: _tabController,
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.white,
+            tabs: [
+              Tab(text: 'Bowl'),
+              Tab(text: 'Plate'),
+              Tab(text: 'Bigger Plate'),
+              Tab(text: 'Family Meal'),
+              Tab(text: 'A La Carte'),
+              Tab(text: 'Drinks'),
+              Tab(text: 'Appetizers and More'),
+            ],
+          ).preferredSize,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: TabBar(
+              isScrollable: true,
+              controller: _tabController,
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.white,
+              indicatorSize: TabBarIndicatorSize.tab,
+              tabs: [
+                Tab(text: 'Bowl'),
+                Tab(text: 'Plate'),
+                Tab(text: 'Bigger Plate'),
+                Tab(text: 'Family Meal'),
+                Tab(text: 'A La Carte'),
+                Tab(text: 'Drinks'),
+                Tab(text: 'Appetizers and More'),
+              ],
+            ),
+          ),
         ),
       ),
       body: ListView(
@@ -141,23 +170,35 @@ class _PandaExpressDetailState extends State<PandaExpressDetail> with SingleTick
                       },
                     ),
                   ],
-                  extras: [
-
-                  ],
+                  extras: [],
                 ),
               ],
             ),
           ),
         ],
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Back to Restaurant List'),
-        ),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CartPage()));
+              },
+              child: Text('Go to Cart'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Back to Restaurant List'),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -219,64 +260,6 @@ class FoodCategory extends StatelessWidget {
     );
   }
 }
-
-class FoodItem {
-  final String name;
-  final String description;
-  final String image;
-  final double price;
-  final List<Option> extras;
-  final List<RequiredOption> requiredOptions;
-
-  FoodItem({
-    required this.name,
-    required this.description,
-    required this.image,
-    required this.price,
-    required this.extras,
-    this.requiredOptions = const [],
-  });
-}
-
-abstract class Option{
-  get name => null;
-
-  num? get price => null;
-
-}
-
-class ExtraOption implements Option {
-  final String name;
-  final double price;
-  ExtraOption({required this.name, required this.price});
-}
-
-class AdditionalOption implements Option {
-  final String name;
-
-  AdditionalOption({required this.name});
-
-  @override
-  num get price => 0.0; // Provide a default value or logic for the price
-}
-
-class RequiredOption implements Option {
-  final String name;
-  final List<String> options;
-  final Map<String, double?> optionPrices; // Map option names to their prices
-
-  RequiredOption({required this.name, required this.options, this.optionPrices = const {}});
-
-  @override
-  String toString() {
-    return '$name (Options: $options, Prices: $optionPrices)';
-  }
-
-  @override
-  double? get price => null; // This remains, ensuring compliance with the Option interface
-}
-
-
 
 
 class FoodOption extends StatelessWidget {
@@ -346,7 +329,34 @@ class FoodOption extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return DialogWithExtras(foodItem: item);
+        return DialogWithExtras(
+          foodItem: item,
+          onAddToCart: (FoodItem addedItem, Map<String, String?> selectedOptions, Map<String, bool> extras) {
+            double totalPrice = addedItem.price;
+
+            // Calculate additional costs for required options
+            addedItem.requiredOptions.forEach((option) {
+              String? selectedOption = selectedOptions[option.name];
+              double? additionalCost = option.optionPrices[selectedOption];
+              if (additionalCost != null) {
+                totalPrice += additionalCost;
+              }
+            });
+
+            // Add the price of selected extras
+            addedItem.extras.forEach((extra) {
+              if (extras[extra.name] == true) {
+                totalPrice += extra.price ?? 0.0;
+              }
+            });
+
+            // Update the price of the item
+            addedItem.price = totalPrice;
+
+            Provider.of<CartModel>(context, listen: false).addItem(addedItem);
+            Navigator.of(context).pop();
+          },
+        );
       },
     );
   }
@@ -355,12 +365,14 @@ class FoodOption extends StatelessWidget {
 
 class DialogWithExtras extends StatefulWidget {
   final FoodItem foodItem;
+  final Function(FoodItem, Map<String, String?>, Map<String, bool>) onAddToCart;
 
-  DialogWithExtras({Key? key, required this.foodItem}) : super(key: key);
+  DialogWithExtras({Key? key, required this.foodItem, required this.onAddToCart}) : super(key: key);
 
   @override
   _DialogWithExtrasState createState() => _DialogWithExtrasState();
 }
+
 
 class _DialogWithExtrasState extends State<DialogWithExtras> {
   late double totalPrice;
@@ -425,12 +437,20 @@ class _DialogWithExtrasState extends State<DialogWithExtras> {
         ElevatedButton(
           onPressed: () {
             if (validateRequiredOptions()) {
-              // Proceed with the updated total price
-              Navigator.of(context).pop();
+              // Update the item with the selected options and extras
+              widget.foodItem.selectedRequiredOptions = selectedRequiredOptions;
+              widget.foodItem.selectedExtras = extrasSelected;
+              Provider.of<CartModel>(context, listen: false).addItem(widget.foodItem.clone());
+              Navigator.of(context).pop(); // Close the dialog
+            } else {
+              // Handle the case where not all required options are selected
+              print('Validation failed, item not added to cart');
             }
           },
+
           child: Text('Add to Cart'),
         ),
+
         TextButton(
           child: Text("Cancel"),
           onPressed: () {
