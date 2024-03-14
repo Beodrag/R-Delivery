@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'food_item_models.dart';
 
 class SubwayDetail extends StatefulWidget {
   final Map<String, String> restaurant;
@@ -212,64 +213,6 @@ class FoodCategory extends StatelessWidget {
     );
   }
 }
-
-class FoodItem {
-  final String name;
-  final String description;
-  final String image;
-  final double price;
-  final List<Option> extras;
-  final List<RequiredOption> requiredOptions;
-
-  FoodItem({
-    required this.name,
-    required this.description,
-    required this.image,
-    required this.price,
-    required this.extras,
-    this.requiredOptions = const [],
-  });
-}
-
-abstract class Option{
-  get name => null;
-
-  num? get price => null;
-
-}
-
-class ExtraOption implements Option {
-  final String name;
-  final double price;
-  ExtraOption({required this.name, required this.price});
-}
-
-class AdditionalOption implements Option {
-  final String name;
-
-  AdditionalOption({required this.name});
-
-  @override
-  num get price => 0.0; // Provide a default value or logic for the price
-}
-
-class RequiredOption implements Option {
-  final String name;
-  final List<String> options;
-
-  RequiredOption({required this.name, required this.options});
-
-  @override
-  String toString() {
-    return '$name (Options: $options)';
-  }
-
-
-  @override
-  double? get price => 0.0;
-}
-
-
 
 class FoodOption extends StatelessWidget {
   final FoodItem foodItem;
