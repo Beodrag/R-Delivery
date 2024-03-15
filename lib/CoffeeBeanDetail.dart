@@ -156,11 +156,11 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
           ),
           // Add more AutoScrollTags for other categories
           AutoScrollTag(
-            key: _keys[0],
+            key: _keys[1],
             controller: _scrollController,
-            index: 0,
+            index: 1,
             child: FoodCategory(
-              key: _keys[0],
+              key: _keys[1],
               categoryName: 'Food|Baked Goods',
               isFirstCategory: true,
               foodList: [
@@ -210,20 +210,6 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                     ExtraOption(name: "Cream Cheese", price: 1.00)
                   ],
                 ),
-
-              ],
-            ),
-          ),
-         AutoScrollTag(
-            key: _keys[0],
-            controller: _scrollController,
-            index: 0,
-            child: FoodCategory(
-              key: _keys[0],
-              categoryName: 'Food|Baked Goods',
-              isFirstCategory: true,
-              foodList: [
-                // Example FoodItem, repeat structure for other menu items
                 FoodItem(
                   name: 'Cakes & Cake Pops|Strawberry Cake Pop',
                   description: 'A delicious strawberry flavored cake pop dipped in pink chocolate coating and rainbow sprinkles. 150 Calories',
@@ -269,15 +255,16 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                     ExtraOption(name: "Utensils", price: 0.00)
                   ],
                 ),
+
               ],
             ),
           ),
           AutoScrollTag(
-            key: _keys[0],
+            key: _keys[2],
             controller: _scrollController,
-            index: 0,
+            index: 2,
             child: FoodCategory(
-              key: _keys[0],
+              key: _keys[2],
               categoryName: 'Food|Breakfast',
               isFirstCategory: true,
               foodList: [
@@ -361,11 +348,11 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
             ),
           ),
          AutoScrollTag(
-            key: _keys[0],
+            key: _keys[3],
             controller: _scrollController,
-            index: 0,
+            index: 3,
             child: FoodCategory(
-              key: _keys[0],
+              key: _keys[3],
               categoryName: 'Food|Lunch',
               isFirstCategory: true,
               foodList: [
@@ -419,11 +406,11 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
             ),
           ),
           AutoScrollTag(
-            key: _keys[0],
+            key: _keys[4],
             controller: _scrollController,
-            index: 0,
+            index: 4,
             child: FoodCategory(
-              key: _keys[0],
+              key: _keys[4],
               categoryName: 'Coffee|Brewed Coffee',
               isFirstCategory: true,
               foodList: [
@@ -436,7 +423,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                        optionPrices: {
+                          "Small": 0.00,
+                          "Regular": 0.60,
+                          "Large": 1.60,
+                        },
                     ),
                     RequiredOption(
                         name: "Choose Roast",
@@ -467,7 +459,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                        optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
                     RequiredOption(
                         name: "Choose Roast",
@@ -498,7 +495,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                        optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
                     RequiredOption(
                         name: "Choose Roast",
@@ -529,7 +531,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                        optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
                     RequiredOption(
                         name: "Choose Roast",
@@ -560,7 +567,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                       optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
                     RequiredOption(
                         name: "Choose Roast",
@@ -588,11 +600,11 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
             ),
           ),
           AutoScrollTag(
-            key: _keys[0],
+            key: _keys[5],
             controller: _scrollController,
-            index: 0,
+            index: 5,
             child: FoodCategory(
-              key: _keys[0],
+              key: _keys[5],
               categoryName: 'Coffee|Iced Coffee',
               isFirstCategory: true,
               foodList: [
@@ -605,7 +617,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                        optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
                     RequiredOption(
                         name: "Creamer",
@@ -633,7 +650,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                       optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
 
                     RequiredOption(
@@ -662,7 +684,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                        optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
 
                     RequiredOption(
@@ -691,7 +718,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                        optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
 
                     RequiredOption(
@@ -720,7 +752,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                        optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
 
                     RequiredOption(
@@ -746,11 +783,11 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
           ),
 
           AutoScrollTag(
-            key: _keys[0],
+            key: _keys[6],
             controller: _scrollController,
-            index: 0,
+            index: 6,
             child: FoodCategory(
-              key: _keys[0],
+              key: _keys[6],
               categoryName: 'Coffee|Iced Espresso',
               isFirstCategory: true,
               foodList: [
@@ -763,7 +800,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                        optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
                     RequiredOption(
                         name: "Creamer",
@@ -792,7 +834,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                       optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
                     RequiredOption(
                         name: "Creamer",
@@ -821,7 +868,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                        optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
                     RequiredOption(
                         name: "Creamer",
@@ -850,7 +902,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                        optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
                     RequiredOption(
                         name: "Creamer",
@@ -879,7 +936,12 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   requiredOptions: [
                     RequiredOption(
                         name: "Choose size",
-                        options: ["Small", "Regular", "Large"]
+                        options: ["Small", "Regular", "Large"],
+                        optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
                     RequiredOption(
                         name: "Creamer",
