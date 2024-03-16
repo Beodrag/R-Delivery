@@ -18,14 +18,14 @@ class HalalShackDetail extends StatefulWidget {
 class _HalalShackDetailState extends State<HalalShackDetail> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final AutoScrollController _scrollController = AutoScrollController();
-  List<GlobalKey> _keys = List.generate(7, (index) => GlobalKey());
+  List<GlobalKey> _keys = List.generate(5, (index) => GlobalKey());
   Timer? _debounce;
   bool _tabChangeByScroll = false;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 7, vsync: this);
+    _tabController = TabController(length: 5, vsync: this);
     _tabController.addListener(_handleTabSelection);
     _scrollController.addListener(_scrollListener);
   }
@@ -387,7 +387,6 @@ class _HalalShackDetailState extends State<HalalShackDetail> with SingleTickerPr
               ],
             ),
           ),
-          // Add more AutoScrollTags for other categories
         ],
       ),
       bottomNavigationBar: Column(
@@ -476,6 +475,7 @@ class FoodCategory extends StatelessWidget {
 }
 
 
+
 class FoodOption extends StatelessWidget {
   final FoodItem foodItem;
 
@@ -490,16 +490,20 @@ class FoodOption extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
-            // Display the food image on the left
-            Expanded(
-              flex: 2,
-              child: Image.asset(
-                foodItem.image,
-                fit: BoxFit.contain,
-                height: 100.0, // You can adjust the height of the food image
+            if (foodItem.image != null && foodItem.image!.isNotEmpty)
+              Expanded(
+                flex: 2,
+                child: Image.asset(
+                  foodItem.image!,
+                  fit: BoxFit.contain,
+                  height: 100.0,
+                ),
+              )
+            else
+              Container(
+                width: 200.0,
+                height: 100.0,
               ),
-            ),
-            // Display the food name and description on the right
             Expanded(
               flex: 3,
               child: Padding(
@@ -509,25 +513,17 @@ class FoodOption extends StatelessWidget {
                   children: [
                     Text(
                       foodItem.name,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8.0),
                     Text(
                       foodItem.description,
-                      style: TextStyle(
-                        fontSize: 14.0,
-                      ),
+                      style: TextStyle(fontSize: 14.0),
                     ),
                     SizedBox(height: 8.0),
                     Text(
                       "\$${foodItem.price.toStringAsFixed(2)}",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

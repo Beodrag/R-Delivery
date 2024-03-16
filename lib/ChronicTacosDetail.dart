@@ -22,7 +22,6 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
   Timer? _debounce;
   bool _tabChangeByScroll = false;
 
-
   @override
   void initState() {
     super.initState();
@@ -45,7 +44,6 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
           final double viewportTop = _scrollController.position.pixels;
           final double viewportBottom = viewportTop + _scrollController.position.viewportDimension;
 
-          // Check if the item is in the viewport
           if (itemTop <= viewportBottom && (itemTop >= viewportTop || position.dy <= viewportBottom)) {
             final double distance = (viewportTop - itemTop).abs();
             if (distance < closestDistance) {
@@ -65,18 +63,12 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
     });
   }
 
-
-
-
   void _handleTabSelection() {
     if (_tabController.indexIsChanging && !_tabChangeByScroll) {
-      // User initiated tab change through direct interaction
       _scrollToIndex(_tabController.index);
     }
-    // Always reset the flag after handling tab selection
     _tabChangeByScroll = false;
   }
-
 
   Future _scrollToIndex(int index) async {
     await _scrollController.scrollToIndex(index, preferPosition: AutoScrollPosition.begin);
@@ -91,14 +83,12 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Chronic Tacos'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.orange,
         foregroundColor: Colors.white,
         bottom: PreferredSize(
           preferredSize: TabBar(
@@ -401,6 +391,7 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
   }
 }
 
+
 class FoodCategory extends StatelessWidget {
   final GlobalKey key;
   final String categoryName;
@@ -459,6 +450,7 @@ class FoodCategory extends StatelessWidget {
 }
 
 
+
 class FoodOption extends StatelessWidget {
   final FoodItem foodItem;
 
@@ -473,16 +465,20 @@ class FoodOption extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
-            // Display the food image on the left
-            Expanded(
-              flex: 2,
-              child: Image.asset(
-                foodItem.image,
-                fit: BoxFit.contain,
-                height: 100.0, // You can adjust the height of the food image
+            if (foodItem.image != null && foodItem.image!.isNotEmpty)
+              Expanded(
+                flex: 2,
+                child: Image.asset(
+                  foodItem.image!,
+                  fit: BoxFit.contain,
+                  height: 100.0,
+                ),
+              )
+            else
+              Container(
+                width: 200.0,
+                height: 100.0,
               ),
-            ),
-            // Display the food name and description on the right
             Expanded(
               flex: 3,
               child: Padding(
@@ -492,25 +488,17 @@ class FoodOption extends StatelessWidget {
                   children: [
                     Text(
                       foodItem.name,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8.0),
                     Text(
                       foodItem.description,
-                      style: TextStyle(
-                        fontSize: 14.0,
-                      ),
+                      style: TextStyle(fontSize: 14.0),
                     ),
                     SizedBox(height: 8.0),
                     Text(
                       "\$${foodItem.price.toStringAsFixed(2)}",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

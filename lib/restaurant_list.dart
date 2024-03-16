@@ -38,19 +38,6 @@ class RestaurantList extends StatelessWidget {
       ),
     },
     {
-      'name': 'Subway',
-      'image': 'assets/images/subway.jpg',
-      'detailPage': (BuildContext context) => ChangeNotifierProvider(
-        create: (_) => CartModel(),
-        child: SubwayDetail(
-          restaurant: {
-            'name': 'Subway',
-            'image': 'assets/images/subway.jpg',
-          },
-        ),
-      ),
-    },
-    {
       'name': 'Panda Express',
       'image': 'assets/images/panda_express.jpg',
       'detailPage': (BuildContext context) => ChangeNotifierProvider(

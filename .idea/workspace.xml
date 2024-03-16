@@ -5,58 +5,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afc41777-b93b-4a81-8793-40e3a0274b82" name="Changes" comment="Amend">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/chronic/bowl.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/chronic/burr.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/chronic/burrito.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/chronic/drinks.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/chronic/extras.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/chronic/quesadilla.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/chronic/taco.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/halal/fries.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/halal/naan.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/halal/rice.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/halal/salad.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/halal/soda.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/DIPS" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/DIPS" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Extension Rules/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Extension Rules/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Extension Scripts/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Extension Scripts/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Extension State/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Extension State/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Extension State/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Extension State/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Favicons" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Favicons" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/GCM Store/Encryption/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/GCM Store/Encryption/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/GCM Store/Encryption/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/GCM Store/Encryption/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/History" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/History" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/History-journal" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/History-journal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Local Storage/leveldb/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Local Storage/leveldb/CURRENT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Local Storage/leveldb/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Local Storage/leveldb/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Local Storage/leveldb/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Local Storage/leveldb/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/dartpad/web_plugin_registrant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/dartpad/web_plugin_registrant.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/version" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/R-Delivery.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/R-Delivery.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/habit/patty_melt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/panda/app.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/panda/bigger.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/panda/drinks2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/panda/family.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/panda/plate.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/4234b51cc59c486b6377ba5ca0b23a13/_composite.stamp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/4234b51cc59c486b6377ba5ca0b23a13/gen_dart_plugin_registrant.stamp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/4234b51cc59c486b6377ba5ca0b23a13/gen_localizations.stamp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ad1da8f7367d495224d4e79fc1121910.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/ad1da8f7367d495224d4e79fc1121910.cache.dill.track.dill" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/flutter_assets/AssetManifest.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/AssetManifest.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/flutter_assets/AssetManifest.bin.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/AssetManifest.bin.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/flutter_assets/AssetManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/AssetManifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/flutter_assets/NOTICES" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/NOTICES" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/flutter_assets/shaders/ink_sparkle.frag" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/shaders/ink_sparkle.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/flutter_assets/assets/images/habit/patty_melt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/flutter_assets/assets/images/panda/app.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/flutter_assets/assets/images/panda/bigger.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/flutter_assets/assets/images/panda/drinks2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/flutter_assets/assets/images/panda/family.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/flutter_assets/assets/images/panda/plate.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ChronicTacosDetail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ChronicTacosDetail.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/CoffeeBeanDetail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/CoffeeBeanDetail.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/HalalShackDetail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/HalalShackDetail.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/HibachiSanDetail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/HibachiSanDetail.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/PandaExpressDetail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/PandaExpressDetail.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SubwayDetail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/SubwayDetail.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/TheHabitDetail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/TheHabitDetail.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/cart_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/cart_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/cart_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/cart_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/food_item_models.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/food_item_models.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/restaurant_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/restaurant_list.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,10 +67,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2cD2A8Ei4UswEMNH2EcIpR4YPHR" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -94,7 +87,7 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
     "io.flutter.reload.alreadyRun": "true",
-    "last_opened_file_path": "C:/Users/ultra/Desktop/R-Delivery/assets/images/halal",
+    "last_opened_file_path": "/Users/Alan/R-Delivery",
     "settings.editor.selected.configurable": "dart.settings",
     "show.migrate.to.gradle.popup": "false"
   }

@@ -3,7 +3,7 @@ class FoodItem {
   final int id;
   final String name;
   final String description;
-  final String image;
+  final String? image;
   double price;
   final List<Option> extras;
   final List<RequiredOption> requiredOptions;
@@ -14,9 +14,9 @@ class FoodItem {
     int? id,
     required this.name,
     required this.description,
-    required this.image,
+    this.image,
     required this.price,
-    required this.extras,
+    this.extras = const [],
     this.requiredOptions = const [],
     Map<String, String?>? selectedRequiredOptions,
     Map<String, bool>? selectedExtras,

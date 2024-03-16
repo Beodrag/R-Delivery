@@ -18,7 +18,7 @@ class PandaExpressDetail extends StatefulWidget {
 class _PandaExpressDetailState extends State<PandaExpressDetail> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final AutoScrollController _scrollController = AutoScrollController();
-  List<GlobalKey> _keys = List.generate(7, (index) => GlobalKey());
+  List<GlobalKey> _keys = List.generate(8, (index) => GlobalKey());
   Timer? _debounce;
   bool _tabChangeByScroll = false;
 
@@ -26,7 +26,7 @@ class _PandaExpressDetailState extends State<PandaExpressDetail> with SingleTick
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 7, vsync: this);
+    _tabController = TabController(length: 8, vsync: this);
     _tabController.addListener(_handleTabSelection);
     _scrollController.addListener(_scrollListener);
   }
@@ -95,279 +95,1139 @@ class _PandaExpressDetailState extends State<PandaExpressDetail> with SingleTick
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Panda Express'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-        bottom: PreferredSize(
-          preferredSize: TabBar(
-            isScrollable: true,
-            controller: _tabController,
-            labelColor: Colors.white,
-            unselectedLabelColor: Colors.white,
-            tabs: [
-              Tab(text: 'Bowl'),
-              Tab(text: 'Plate'),
-              Tab(text: 'Bigger Plate'),
-              Tab(text: 'Family Meal'),
-              Tab(text: 'Drinks'),
-              Tab(text: 'Appetizers and More'),
-            ],
-          ).preferredSize,
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: TabBar(
+
+
+    return WillPopScope(
+      onWillPop: () async {
+        final result = await _showExitConfirmationDialog(context);
+        if (result) {
+          Provider.of<CartModel>(context, listen: false).clearCart();
+        }
+        return result;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Panda Express'),
+          backgroundColor: Colors.red,
+          foregroundColor: Colors.white,
+          bottom: PreferredSize(
+            preferredSize: TabBar(
               isScrollable: true,
               controller: _tabController,
               labelColor: Colors.white,
               unselectedLabelColor: Colors.white,
-              indicatorSize: TabBarIndicatorSize.tab,
               tabs: [
                 Tab(text: 'Bowl'),
                 Tab(text: 'Plate'),
                 Tab(text: 'Bigger Plate'),
                 Tab(text: 'Family Meal'),
+                Tab(text: 'A La Carte'),
                 Tab(text: 'Drinks'),
                 Tab(text: 'Appetizers and More'),
+                Tab(text: 'Catering'),
               ],
+            ).preferredSize,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: TabBar(
+                isScrollable: true,
+                controller: _tabController,
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.white,
+                indicatorSize: TabBarIndicatorSize.tab,
+                tabs: [
+                  Tab(text: 'Bowl'),
+                  Tab(text: 'Plate'),
+                  Tab(text: 'Bigger Plate'),
+                  Tab(text: 'Family Meal'),
+                  Tab(text: 'A La Carte'),
+                  Tab(text: 'Drinks'),
+                  Tab(text: 'Appetizers and More'),
+                  Tab(text: 'Catering'),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      body: ListView(
-        controller: _scrollController,
-        children: [
-          AutoScrollTag(
-            key: _keys[0],
-            controller: _scrollController,
-            index: 0,
-            child: FoodCategory(
+        body: ListView(
+          controller: _scrollController,
+          children: [
+            AutoScrollTag(
               key: _keys[0],
-              categoryName: 'Bowl',
-              isFirstCategory: true,
-              foodList: [
-                FoodItem(
-                  name: 'Bowl',
-                  description: 'Any 1 Side & 1 Entree',
-                  image: 'assets/images/panda/bowl.webp',
-                  price: 8.40,
-                  requiredOptions: [
-                    RequiredOption(
-                        name: "Step 1",
-                        options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
-                    ),
-                    RequiredOption(
-                      name: "Step 2",
-                      options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
-                        "Honey Walnut Shrimp", "Grilled Teriyaki Chicken"],
-                      optionPrices: {
-                        "Firecracker Shrimp": 1.60,
-                        "Black Pepper Angus Steak": 1.60,
-                        "Honey Walnut Shrimp": 1.60,
-                      },
-                    ),
-                  ],
-                  extras: [],
-                ),
-              ],
+              controller: _scrollController,
+              index: 0,
+              child: FoodCategory(
+                key: _keys[0],
+                categoryName: 'Bowl',
+                isFirstCategory: true,
+                foodList: [
+                  FoodItem(
+                    name: 'Bowl',
+                    description: '1 Side & 1 Entree',
+                    image: 'assets/images/panda/bowl.webp',
+                    price: 8.40,
+                    requiredOptions: [
+                      RequiredOption(
+                          name: "Side First Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side Second Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                        name: "Entree",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                        "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 1.60,
+                          "Black Pepper Angus Steak": 1.60,
+                          "Honey Walnut Shrimp": 1.60,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                ],
+              ),
             ),
-          ),
-          AutoScrollTag(
-            key: _keys[1],
-            controller: _scrollController,
-            index: 1,
-            child: FoodCategory(
+            AutoScrollTag(
               key: _keys[1],
-              categoryName: 'Plate',
-              isFirstCategory: false,
-              foodList: [
-                FoodItem(
-                  name: 'Plate',
-                  description: 'Any 1 Side & 2 Entrees',
-                  image: 'assets/images/panda/plate.jpg',
-                  price: 9.90,
-                  requiredOptions: [
-                    RequiredOption(
-                        name: "Step 1",
-                        options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
-                    ),
-                    RequiredOption(
-                      name: "Step 2",
-                      options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
-                        "Honey Walnut Shrimp", "Grilled Teriyaki Chicken"],
-                      optionPrices: {
-                        "Firecracker Shrimp": 1.60,
-                        "Black Pepper Angus Steak": 1.60,
-                        "Honey Walnut Shrimp": 1.60,
-                      },
-                    ),
-                  ],
-                  extras: [],
-                ),
-              ],
+              controller: _scrollController,
+              index: 1,
+              child: FoodCategory(
+                key: _keys[1],
+                categoryName: 'Plate',
+                isFirstCategory: false,
+                foodList: [
+                  FoodItem(
+                    name: 'Plate',
+                    description: '1 Side & 2 Entrees',
+                    image: 'assets/images/panda/plate.webp',
+                    price: 9.90,
+                    requiredOptions: [
+                      RequiredOption(
+                          name: "Side First Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side Second Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                        name: "Entree 1",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 1.60,
+                          "Black Pepper Angus Steak": 1.60,
+                          "Honey Walnut Shrimp": 1.60,
+                        },
+                      ),
+                      RequiredOption(
+                        name: "Entree 2",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 1.60,
+                          "Black Pepper Angus Steak": 1.60,
+                          "Honey Walnut Shrimp": 1.60,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                ],
+              ),
             ),
-          ),
-          AutoScrollTag(
-            key: _keys[2],
-            controller: _scrollController,
-            index: 2,
-            child: FoodCategory(
+            AutoScrollTag(
               key: _keys[2],
-              categoryName: 'Bigger Plate',
-              isFirstCategory: false,
-              foodList: [
-                FoodItem(
-                  name: 'Bigger Plate',
-                  description: 'Any 1 Side & 2 Entrees',
-                  image: 'assets/images/panda/bigger.jpg',
-                  price: 11.40,
-                  requiredOptions: [
-                    RequiredOption(
-                        name: "Step 1",
-                        options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
-                    ),
-                    RequiredOption(
-                      name: "Step 2",
-                      options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
-                        "Honey Walnut Shrimp", "Grilled Teriyaki Chicken"],
-                      optionPrices: {
-                        "Firecracker Shrimp": 1.60,
-                        "Black Pepper Angus Steak": 1.60,
-                        "Honey Walnut Shrimp": 1.60,
-                      },
-                    ),
-                  ],
-                  extras: [],
-                ),
-              ],
+              controller: _scrollController,
+              index: 2,
+              child: FoodCategory(
+                key: _keys[2],
+                categoryName: 'Bigger Plate',
+                isFirstCategory: false,
+                foodList: [
+                  FoodItem(
+                    name: 'Bigger Plate',
+                    description: '1 Side & 3 Entrees',
+                    image: 'assets/images/panda/bigger_plate.webp',
+                    price: 11.40,
+                    requiredOptions: [
+                      RequiredOption(
+                          name: "Side First Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side Second Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                        name: "Entree 1",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 1.60,
+                          "Black Pepper Angus Steak": 1.60,
+                          "Honey Walnut Shrimp": 1.60,
+                        },
+                      ),
+                      RequiredOption(
+                        name: "Entree 2",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 1.60,
+                          "Black Pepper Angus Steak": 1.60,
+                          "Honey Walnut Shrimp": 1.60,
+                        },
+                      ),
+                      RequiredOption(
+                        name: "Entree 3",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 1.60,
+                          "Black Pepper Angus Steak": 1.60,
+                          "Honey Walnut Shrimp": 1.60,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                ],
+              ),
             ),
-          ),
-          AutoScrollTag(
-            key: _keys[3],
-            controller: _scrollController,
-            index: 3,
-            child: FoodCategory(
+            AutoScrollTag(
               key: _keys[3],
-              categoryName: 'Family Meal',
-              isFirstCategory: false,
-              foodList: [
-                FoodItem(
-                  name: 'Family Meal',
-                  description: '2 Large Sides & 3 Entrees',
-                  image: 'assets/images/panda/family.jpg',
-                  price: 43.00,
-                  requiredOptions: [
-                    RequiredOption(
-                        name: "Step 1",
-                        options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
-                    ),
-                    RequiredOption(
-                      name: "Step 2",
-                      options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
-                        "Honey Walnut Shrimp", "Grilled Teriyaki Chicken"],
-                      optionPrices: {
-                        "Firecracker Shrimp": 1.60,
-                        "Black Pepper Angus Steak": 1.60,
-                        "Honey Walnut Shrimp": 1.60,
-                      },
-                    ),
-                  ],
-                  extras: [],
-                ),
-              ],
+              controller: _scrollController,
+              index: 3,
+              child: FoodCategory(
+                key: _keys[3],
+                categoryName: 'Family Meal',
+                isFirstCategory: false,
+                foodList: [
+                  FoodItem(
+                    name: 'Family Meal',
+                    description: '2 Large Sides & 3 Large Entrees',
+                    image: 'assets/images/panda/family_meal.webp',
+                    price: 43.00,
+                    requiredOptions: [
+                      RequiredOption(
+                          name: "Side 1",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 2",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                        name: "Entree 1",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 3.75,
+                          "Black Pepper Angus Steak": 3.75,
+                          "Honey Walnut Shrimp": 3.75,
+                        },
+                      ),
+                      RequiredOption(
+                        name: "Entree 2",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 3.75,
+                          "Black Pepper Angus Steak": 3.75,
+                          "Honey Walnut Shrimp": 3.75,
+                        },
+                      ),
+                      RequiredOption(
+                        name: "Entree 3",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 3.75,
+                          "Black Pepper Angus Steak": 3.75,
+                          "Honey Walnut Shrimp": 3.75,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                ],
+              ),
             ),
-          ),
-          AutoScrollTag(
-            key: _keys[4],
-            controller: _scrollController,
-            index: 4,
-            child: FoodCategory(
+            AutoScrollTag(
               key: _keys[4],
-              categoryName: 'Drinks',
-              isFirstCategory: false,
-              foodList: [
-                FoodItem(
-                  name: 'Drinks',
-                  description: 'Add a refreshing beverage',
-                  image: 'assets/images/panda/drinks2.jpg',
-                  price: 0.00,
-                  requiredOptions: [
-                    RequiredOption(
-                      name: "Drinks",
-                      options: ["Regular Drink", "Large Drink"],
-                      optionPrices: {
-                        "Regular Drink": 1.50,
-                        "Large Drink": 2.00,
-                      },
-                    ),
-                  ],
-                  extras: [],
-                ),
-              ],
+              controller: _scrollController,
+              index: 4,
+              child: FoodCategory(
+                key: _keys[4],
+                categoryName: 'A La Carte',
+                isFirstCategory: false,
+                foodList: [
+                  FoodItem(
+                    name: 'Firecracker Shrimp',
+                    description: 'A Wok Smart menu item that features large, succulent shrimp, red and yellow bell peppers,'
+                        ' onions, string beans, and whole dried chilis, wok-tossed in a savory and spicy black bean sauce.',
+                    image: 'assets/images/panda/firecracker_shrimp.webp',
+                    price: 6.45,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 4.55,
+                          "Large": 8.5,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'The Original Orange Chicken',
+                    description: 'Our signature dish. Crispy chicken wok-tossed in a sweet and spicy orange sauce.',
+                    image: 'assets/images/panda/orange_chicken.webp',
+                    price: 5.20,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 3.3,
+                          "Large": 6,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Black Pepper Angus Steak',
+                    description: 'Angus steak wok-seared with green beans, onions, red bell peppers and mushrooms in a savory black pepper sauce.',
+                    image: 'assets/images/panda/pepper_steak.webp',
+                    price: 6.45,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 4.55,
+                          "Large": 8.5,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Honey Walnut Shrimp',
+                    description: 'Large tempura-battered shrimp, wok-tossed in a honey sauce and topped with glazed walnuts.',
+                    image: 'assets/images/panda/honey_shrimp.webp',
+                    price: 6.45,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 4.55,
+                          "Large": 8.5,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Grilled Teriyaki Chicken',
+                    description: 'Grilled chicken hand-sliced to order and served with teriyaki sauce.',
+                    image: 'assets/images/panda/teriyaki_chicken.webp',
+                    price: 5.20,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 3.3,
+                          "Large": 6,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Broccoli Beef',
+                    description: 'A classic favorite. Tender beef and fresh broccoli in a ginger soy sauce.',
+                    image: 'assets/images/panda/broccoli_beef.webp',
+                    price: 5.20,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 3.3,
+                          "Large": 6,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Kung Pao Chicken',
+                    description: 'A Szechwan-inspired dish with chicken, peanuts and vegetables, finished with chili peppers.',
+                    image: 'assets/images/panda/kung_pao_chicken.webp',
+                    price: 5.20,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 3.3,
+                          "Large": 6,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Honey Sesame Chicken Breast',
+                    description: 'Juicy chicken & fresh-cut veggies coated in a sauce made with organic honey.',
+                    image: 'assets/images/panda/honey_chicken.webp',
+                    price: 5.20,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 3.3,
+                          "Large": 6,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Beijing Beef',
+                    description: 'Crispy beef, bell peppers and onions in a sweet-tangy sauce.',
+                    image: 'assets/images/panda/beijing_beef.webp',
+                    price: 5.20,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 3.3,
+                          "Large": 6,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Mushroom Chicken',
+                    description: 'A delicate combination of chicken, mushrooms and zucchini wok-tossed with a light ginger soy sauce.',
+                    image: 'assets/images/panda/mushroom_chicken.webp',
+                    price: 5.20,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 3.3,
+                          "Large": 6,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'String Bean Chicken Breast',
+                    description: 'Chicken breast, string beans and onions wok-tossed in a mild ginger soy sauce.',
+                    image: 'assets/images/panda/stringbean_chicken.webp',
+                    price: 5.20,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 3.3,
+                          "Large": 6,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Eggplant Tofu',
+                    description: 'Lightly browned tofu, eggplant and red bell peppers tossed in a sweet and spicy sauce.',
+                    image: 'assets/images/panda/eggplant_tofu.webp',
+                    price: 5.20,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 3.3,
+                          "Large": 6,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Super Greens',
+                    description: 'A healthful medley of broccoli, cabbage, and kale.',
+                    image: 'assets/images/panda/super_greens.webp',
+                    price: 4.40,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Medium", "Large"],
+                        optionPrices: {
+                          "Large": 1,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Chow Mein',
+                    description: 'Stir-fried wheat noodles with onions, celery and cabbage.',
+                    image: 'assets/images/panda/chow_mein.webp',
+                    price: 4.40,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Medium", "Large"],
+                        optionPrices: {
+                          "Large": 1,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Fried Rice',
+                    description: 'Prepared steamed white rice with soy sauce, eggs, peas, carrots and green onions.',
+                    image: 'assets/images/panda/fried_rice.webp',
+                    price: 4.40,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Medium", "Large"],
+                        optionPrices: {
+                          "Large": 1,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'White Steamed Rice',
+                    description: '',
+                    image: 'assets/images/panda/white_rice.webp',
+                    price: 4.40,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Medium", "Large"],
+                        optionPrices: {
+                          "Large": 1,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                ],
+              ),
             ),
-          ),
-          AutoScrollTag(
-            key: _keys[5],
-            controller: _scrollController,
-            index: 5,
-            child: FoodCategory(
+            AutoScrollTag(
               key: _keys[5],
-              categoryName: 'Appetizers and More',
-              isFirstCategory: false,
-              foodList: [
-                FoodItem(
-                  name: 'Appetizers and More',
-                  description: 'Extras',
-                  image: 'assets/images/panda/app.jpg',
-                  price: 0.00,
-                  requiredOptions: [
-                    RequiredOption(
-                      name: "Extras",
-                      options: ["Chicken Egg Roll - Small (1)", "Chicken Egg Roll - Large (6)" "Veggie Spring Roll - Small (2)", "Veggie Spring Roll - Large (12)", "Cream Cheese Rangoon (3)",
-                        "Hot and Sour Soup"],
-                      optionPrices: {
-                        "Chicken Egg Roll - Small (1)": 2.00,
-                        "Chicken Egg Roll - Large (6)": 11.20,
-                        "Veggie Spring Roll - Small (2)": 2.00,
-                        "Veggie Spring Roll - Large (12)": 11.20,
-                        "Cream Cheese Rangoon (3)": 2.00,
-                        "Hot and Sour Soup": 1.50,
-                      },
-                    ),
-                  ],
-                  extras: [],
-                ),
-              ],
+              controller: _scrollController,
+              index: 5,
+              child: FoodCategory(
+                key: _keys[5],
+                categoryName: 'Drinks',
+                isFirstCategory: false,
+                foodList: [
+                  FoodItem(
+                    name: 'Dr Pepper',
+                    description: '',
+                    image: 'assets/images/panda/drpepper.webp',
+                    price: 2.59,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 0.4,
+                          "Large": 0.8,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Pepsi',
+                    description: '',
+                    image: 'assets/images/panda/pepsi.webp',
+                    price: 2.59,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 0.4,
+                          "Large": 0.8,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Diet Pepsi',
+                    description: '',
+                    image: 'assets/images/panda/diet_pepsi.webp',
+                    price: 2.59,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 0.4,
+                          "Large": 0.8,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Mountain Dew',
+                    description: '',
+                    image: 'assets/images/panda/mountain_dew.webp',
+                    price: 2.59,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 0.4,
+                          "Large": 0.8,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Lipton Brisk Raspberry Iced Tea',
+                    description: '',
+                    image: 'assets/images/panda/brisk.webp',
+                    price: 2.59,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 0.4,
+                          "Large": 0.8,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Sierra Mist',
+                    description: '',
+                    image: 'assets/images/panda/sierra_mist.webp',
+                    price: 2.59,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 0.4,
+                          "Large": 0.8,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Sobe Yumberry Pomegranate',
+                    description: '',
+                    image: 'assets/images/panda/sobe.webp',
+                    price: 2.59,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 0.4,
+                          "Large": 0.8,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Tropicana Lemonade',
+                    description: '',
+                    image: 'assets/images/panda/tropicana.webp',
+                    price: 2.59,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 0.4,
+                          "Large": 0.8,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Tropicana Pink Lemonade',
+                    description: '',
+                    image: 'assets/images/panda/tropicana_pink.webp',
+                    price: 2.59,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Medium", "Large"],
+                        optionPrices: {
+                          "Medium": 0.4,
+                          "Large": 0.8,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Aquafina',
+                    description: '20oz Bottle',
+                    image: 'assets/images/panda/aquafina.webp',
+                    price: 2.40,
+                    extras: [],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CartPage()));
-              },
-              child: Text('Go to Cart'),
+            AutoScrollTag(
+              key: _keys[6],
+              controller: _scrollController,
+              index: 6,
+              child: FoodCategory(
+                key: _keys[6],
+                categoryName: 'Appetizers and More',
+                isFirstCategory: false,
+                foodList: [
+                  FoodItem(
+                    name: 'Chicken Egg Roll',
+                    description: 'Cabbage, carrots, green onions and chicken in a crispy wonton wrapper.',
+                    image: 'assets/images/panda/chicken_eggroll.webp',
+                    price: 2.00,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small", "Large (6pcs)"],
+                        optionPrices: {
+                          "Large (6pcs)": 9.2,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Veggie Spring Roll',
+                    description: 'Cabbage, carrots, green onions and chicken in a crispy wonton wrapper.',
+                    image: 'assets/images/panda/springroll.webp',
+                    price: 2.00,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small (2pcs)", "Large (12pcs)"],
+                        optionPrices: {
+                          "Large (12pcs)": 9.2,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Cream Cheese Rangoon',
+                    description: 'Wonton wrappers filled with cream cheese and served with sweet and sour sauce.',
+                    image: 'assets/images/panda/rangoon.webp',
+                    price: 2.00,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Small (3pcs)", "Large (12pcs)"],
+                        optionPrices: {
+                          "Large (12pcs)": 6.4,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Hot & Sour Soup',
+                    description: '',
+                    image: 'assets/images/panda/soup.webp',
+                    price: 1.50,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Size",
+                        options: ["Cup (12oz)", "Bowl (17oz)"],
+                        optionPrices: {
+                          "Bowl (17oz)": 1.5,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Back to Restaurant List'),
+            AutoScrollTag(
+              key: _keys[7],
+              controller: _scrollController,
+              index: 7,
+              child: FoodCategory(
+                key: _keys[7],
+                categoryName: 'Catering',
+                isFirstCategory: false,
+                foodList: [
+                  FoodItem(
+                    name: 'Party Size Side',
+                    description: '10-12 Servings Per Party Tray',
+                    image: 'assets/images/panda/party_side.webp',
+                    price: 16.00,
+                    requiredOptions: [
+                      RequiredOption(
+                          name: "Side First Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side Second Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Party Size Entree',
+                    description: '12-14 Servings Per Party Tray',
+                    image: 'assets/images/panda/party_entree.webp',
+                    price: 41.00,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Entree",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 15.00,
+                          "Black Pepper Angus Steak": 15.00,
+                          "Honey Walnut Shrimp": 15.00,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: 'Party Size Appetizer',
+                    description: '12-14 Servings Per Party Tray',
+                    image: 'assets/images/panda/party_appetizer.webp',
+                    price: 34.00,
+                    requiredOptions: [
+                      RequiredOption(
+                        name: "Appetizer",
+                        options: ["Cream Cheese Rangoon", "Veggie Spring Roll", "Chicken Egg Roll"],
+                        optionPrices: {
+                          "Veggie Spring Roll": 7.00,
+                          "Chicken Egg Roll": 7.00,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: '12-16 Person Party Bundle',
+                    description: '2 Party Tray Entrees, 2 Party Tray Sides, Fortune Cookies',
+                    image: 'assets/images/panda/party_bundle.webp',
+                    price: 108.00,
+                    requiredOptions: [
+                      RequiredOption(
+                          name: "Side 1 First Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 1 Second Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 2 First Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 2 Second Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                        name: "Entree 1",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 15.00,
+                          "Black Pepper Angus Steak": 15.00,
+                          "Honey Walnut Shrimp": 15.00,
+                        },
+                      ),
+                      RequiredOption(
+                        name: "Entree 2",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 15.00,
+                          "Black Pepper Angus Steak": 15.00,
+                          "Honey Walnut Shrimp": 15.00,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: '18-22 Person Party Bundle',
+                    description: '3 Party Tray Entrees, 3 Party Tray Sides, Fortune Cookies',
+                    image: 'assets/images/panda/party_bundle.webp',
+                    price: 154.00,
+                    requiredOptions: [
+                      RequiredOption(
+                          name: "Side 1 First Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 1 Second Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 2 First Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 2 Second Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 3 First Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 3 Second Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                        name: "Entree 1",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 15.00,
+                          "Black Pepper Angus Steak": 15.00,
+                          "Honey Walnut Shrimp": 15.00,
+                        },
+                      ),
+                      RequiredOption(
+                        name: "Entree 2",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 15.00,
+                          "Black Pepper Angus Steak": 15.00,
+                          "Honey Walnut Shrimp": 15.00,
+                        },
+                      ),
+                      RequiredOption(
+                        name: "Entree 3",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 15.00,
+                          "Black Pepper Angus Steak": 15.00,
+                          "Honey Walnut Shrimp": 15.00,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                  FoodItem(
+                    name: '26-30 Person Party Bundle',
+                    description: '4 Party Tray Entrees, 4 Party Tray Sides, Fortune Cookies',
+                    image: 'assets/images/panda/party_bundle.webp',
+                    price: 194.00,
+                    requiredOptions: [
+                      RequiredOption(
+                          name: "Side 1 First Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 1 Second Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 2 First Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 2 Second Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 3 First Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 3 Second Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 4 First Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                          name: "Side 4 Second Half",
+                          options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                      ),
+                      RequiredOption(
+                        name: "Entree 1",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 15.00,
+                          "Black Pepper Angus Steak": 15.00,
+                          "Honey Walnut Shrimp": 15.00,
+                        },
+                      ),
+                      RequiredOption(
+                        name: "Entree 2",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 15.00,
+                          "Black Pepper Angus Steak": 15.00,
+                          "Honey Walnut Shrimp": 15.00,
+                        },
+                      ),
+                      RequiredOption(
+                        name: "Entree 3",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 15.00,
+                          "Black Pepper Angus Steak": 15.00,
+                          "Honey Walnut Shrimp": 15.00,
+                        },
+                      ),
+                      RequiredOption(
+                        name: "Entree 4",
+                        options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                          "Honey Walnut Shrimp", "Grilled Teriyaki Chicken", "Kung Pao Chicken",
+                          "Honey Sesame Chicken Breast", "Beijing Beef", "Mushroom Chicken", "String Bean Chicken Breast",
+                          "Broccoli Beef", "Eggplant Tofu", "Super Greens"],
+                        optionPrices: {
+                          "Firecracker Shrimp": 15.00,
+                          "Black Pepper Angus Steak": 15.00,
+                          "Honey Walnut Shrimp": 15.00,
+                        },
+                      ),
+                    ],
+                    extras: [],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => CartPage(key: UniqueKey())));
+                },
+                child: Text('Go to Cart'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Back to Restaurant List'),
+              ),
+            ),
+          ],
+        ),
+      )
     );
   }
+
+  Future<bool> _showExitConfirmationDialog(BuildContext context) async {
+    return (await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Confirm'),
+        content: Text('Do you want to go back to the restaurant list?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text('No'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text('Yes'),
+          ),
+        ],
+      ),
+    )) ?? false;
+  }
+
 }
 
 class FoodCategory extends StatelessWidget {
@@ -428,6 +1288,7 @@ class FoodCategory extends StatelessWidget {
 }
 
 
+
 class FoodOption extends StatelessWidget {
   final FoodItem foodItem;
 
@@ -442,16 +1303,20 @@ class FoodOption extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
-            // Display the food image on the left
-            Expanded(
-              flex: 2,
-              child: Image.asset(
-                foodItem.image,
-                fit: BoxFit.contain,
-                height: 100.0, // You can adjust the height of the food image
+            if (foodItem.image != null && foodItem.image!.isNotEmpty)
+              Expanded(
+                flex: 2,
+                child: Image.asset(
+                  foodItem.image!,
+                  fit: BoxFit.contain,
+                  height: 100.0,
+                ),
+              )
+            else
+              Container(
+                width: 200.0,
+                height: 100.0,
               ),
-            ),
-            // Display the food name and description on the right
             Expanded(
               flex: 3,
               child: Padding(
@@ -461,25 +1326,17 @@ class FoodOption extends StatelessWidget {
                   children: [
                     Text(
                       foodItem.name,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8.0),
                     Text(
                       foodItem.description,
-                      style: TextStyle(
-                        fontSize: 14.0,
-                      ),
+                      style: TextStyle(fontSize: 14.0),
                     ),
                     SizedBox(height: 8.0),
                     Text(
                       "\$${foodItem.price.toStringAsFixed(2)}",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

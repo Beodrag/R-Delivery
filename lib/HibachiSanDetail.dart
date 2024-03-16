@@ -262,7 +262,7 @@ class _HibachiSanDetailState extends State<HibachiSanDetail> with SingleTickerPr
             child: FoodCategory(
               key: _keys[1],
               categoryName: 'Tea Bar Drinks',
-              isFirstCategory: true,
+              isFirstCategory: false,
               foodList: [
                 // Example FoodItem, repeat structure for other menu items
                 FoodItem(
@@ -275,8 +275,8 @@ class _HibachiSanDetailState extends State<HibachiSanDetail> with SingleTickerPr
                         name: "Size",
                         options: ["Cup", "Bottle" ],
                         optionPrices: {
-                            "Cup": 0.00,
-                            "Bottle": 0.50
+                          "Cup": 0.00,
+                          "Bottle": 0.50
                         }
                     ),
                   ],
@@ -428,16 +428,20 @@ class FoodOption extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
-            // Display the food image on the left
-            Expanded(
-              flex: 2,
-              child: Image.asset(
-                foodItem.image,
-                fit: BoxFit.contain,
-                height: 100.0, // You can adjust the height of the food image
+            if (foodItem.image != null && foodItem.image!.isNotEmpty)
+              Expanded(
+                flex: 2,
+                child: Image.asset(
+                  foodItem.image!,
+                  fit: BoxFit.contain,
+                  height: 100.0,
+                ),
+              )
+            else
+              Container(
+                width: 200.0,
+                height: 100.0,
               ),
-            ),
-            // Display the food name and description on the right
             Expanded(
               flex: 3,
               child: Padding(
@@ -447,25 +451,17 @@ class FoodOption extends StatelessWidget {
                   children: [
                     Text(
                       foodItem.name,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8.0),
                     Text(
                       foodItem.description,
-                      style: TextStyle(
-                        fontSize: 14.0,
-                      ),
+                      style: TextStyle(fontSize: 14.0),
                     ),
                     SizedBox(height: 8.0),
                     Text(
                       "\$${foodItem.price.toStringAsFixed(2)}",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

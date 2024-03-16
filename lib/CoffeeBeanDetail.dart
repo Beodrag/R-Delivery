@@ -162,7 +162,7 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
             child: FoodCategory(
               key: _keys[1],
               categoryName: 'Food|Baked Goods',
-              isFirstCategory: true,
+              isFirstCategory: false,
               foodList: [
                 // Example FoodItem, repeat structure for other menu items
                 FoodItem(
@@ -180,21 +180,21 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                     ExtraOption(name: "Cream Cheese", price: 1.00)
                   ],
                 ),
-            FoodItem(
-              name: 'Bagels & Spreads|Everything Bagel',
-              description: 'A classic New York-style bagel with a delicious combination of cheese and jalapeño. Ask for it toasted and/or with cream cheese. This has not been Kosher certified. 290 Calories',
-              image: 'assets/images/coffeeBean/everythingbagel.jpg',
-              price: 2.45,
-              requiredOptions: [
-                RequiredOption(
-                    name: "Would you like this item Oven Toasted?",
-                    options: ["Oven Toasted", "Not Warmed"]
+                FoodItem(
+                  name: 'Bagels & Spreads|Everything Bagel',
+                  description: 'A classic New York-style bagel with a delicious combination of cheese and jalapeño. Ask for it toasted and/or with cream cheese. This has not been Kosher certified. 290 Calories',
+                  image: 'assets/images/coffeeBean/everythingbagel.jpg',
+                  price: 2.45,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Would you like this item Oven Toasted?",
+                        options: ["Oven Toasted", "Not Warmed"]
+                    ),
+                  ],
+                  extras: [
+                    ExtraOption(name: "Cream Cheese", price: 1.00)
+                  ],
                 ),
-              ],
-              extras: [
-                ExtraOption(name: "Cream Cheese", price: 1.00)
-              ],
-            ),
                 FoodItem(
                   name: 'Bagels & Spreads|Plain Bagel',
                   description: 'A classic New York-style bagel with a delicious combination of cheese and jalapeño. Ask for it toasted and/or with cream cheese. This has not been Kosher certified. 290 Calories',
@@ -266,7 +266,7 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
             child: FoodCategory(
               key: _keys[2],
               categoryName: 'Food|Breakfast',
-              isFirstCategory: true,
+              isFirstCategory: false,
               foodList: [
                 // Example FoodItem, repeat structure for other menu items
                 FoodItem(
@@ -347,14 +347,14 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
               ],
             ),
           ),
-         AutoScrollTag(
+          AutoScrollTag(
             key: _keys[3],
             controller: _scrollController,
             index: 3,
             child: FoodCategory(
               key: _keys[3],
               categoryName: 'Food|Lunch',
-              isFirstCategory: true,
+              isFirstCategory: false,
               foodList: [
                 // Example FoodItem, repeat structure for other menu items
                 FoodItem(
@@ -412,7 +412,7 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
             child: FoodCategory(
               key: _keys[4],
               categoryName: 'Coffee|Brewed Coffee',
-              isFirstCategory: true,
+              isFirstCategory: false,
               foodList: [
                 // Example FoodItem, repeat structure for other menu items
                 FoodItem(
@@ -422,13 +422,13 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 6.75,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                        optionPrices: {
-                          "Small": 0.00,
-                          "Regular": 0.60,
-                          "Large": 1.60,
-                        },
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
+                        "Small": 0.00,
+                        "Regular": 0.60,
+                        "Large": 1.60,
+                      },
                     ),
                     RequiredOption(
                         name: "Choose Roast",
@@ -458,9 +458,9 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 3.58,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                        optionPrices: {
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
                         "Small": 0.00,
                         "Regular": 0.60,
                         "Large": 1.60,
@@ -494,9 +494,9 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 4.38,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                        optionPrices: {
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
                         "Small": 0.00,
                         "Regular": 0.60,
                         "Large": 1.60,
@@ -530,9 +530,9 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 4.58,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                        optionPrices: {
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
                         "Small": 0.00,
                         "Regular": 0.60,
                         "Large": 1.60,
@@ -566,9 +566,9 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 4.38,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                       optionPrices: {
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
                         "Small": 0.00,
                         "Regular": 0.60,
                         "Large": 1.60,
@@ -606,7 +606,7 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
             child: FoodCategory(
               key: _keys[5],
               categoryName: 'Coffee|Iced Coffee',
-              isFirstCategory: true,
+              isFirstCategory: false,
               foodList: [
                 // Example FoodItem, repeat structure for other menu items
                 FoodItem(
@@ -616,9 +616,9 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 3.88,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                        optionPrices: {
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
                         "Small": 0.00,
                         "Regular": 0.60,
                         "Large": 1.60,
@@ -649,9 +649,9 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 4.68,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                       optionPrices: {
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
                         "Small": 0.00,
                         "Regular": 0.60,
                         "Large": 1.60,
@@ -683,9 +683,9 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 4.88,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                        optionPrices: {
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
                         "Small": 0.00,
                         "Regular": 0.60,
                         "Large": 1.60,
@@ -717,9 +717,9 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 4.68,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                        optionPrices: {
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
                         "Small": 0.00,
                         "Regular": 0.60,
                         "Large": 1.60,
@@ -751,9 +751,9 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 4.68,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                        optionPrices: {
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
                         "Small": 0.00,
                         "Regular": 0.60,
                         "Large": 1.60,
@@ -789,7 +789,7 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
             child: FoodCategory(
               key: _keys[6],
               categoryName: 'Coffee|Iced Espresso',
-              isFirstCategory: true,
+              isFirstCategory: false,
               foodList: [
                 // Example FoodItem, repeat structure for other menu items
                 FoodItem(
@@ -799,9 +799,9 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 5.38,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                        optionPrices: {
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
                         "Small": 0.00,
                         "Regular": 0.60,
                         "Large": 1.60,
@@ -833,9 +833,9 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 4.48,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                       optionPrices: {
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
                         "Small": 0.00,
                         "Regular": 0.60,
                         "Large": 1.60,
@@ -867,9 +867,9 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 5.18,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                        optionPrices: {
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
                         "Small": 0.00,
                         "Regular": 0.60,
                         "Large": 1.60,
@@ -901,9 +901,9 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 5.18,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                        optionPrices: {
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
                         "Small": 0.00,
                         "Regular": 0.60,
                         "Large": 1.60,
@@ -935,9 +935,9 @@ class _CoffeeBeanDetailState extends State<CoffeeBeanDetail> with SingleTickerPr
                   price: 5.18,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Choose size",
-                        options: ["Small", "Regular", "Large"],
-                        optionPrices: {
+                      name: "Choose size",
+                      options: ["Small", "Regular", "Large"],
+                      optionPrices: {
                         "Small": 0.00,
                         "Regular": 0.60,
                         "Large": 1.60,
@@ -1067,16 +1067,20 @@ class FoodOption extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
-            // Display the food image on the left
-            Expanded(
-              flex: 2,
-              child: Image.asset(
-                foodItem.image,
-                fit: BoxFit.contain,
-                height: 100.0, // You can adjust the height of the food image
+            if (foodItem.image != null && foodItem.image!.isNotEmpty)
+              Expanded(
+                flex: 2,
+                child: Image.asset(
+                  foodItem.image!,
+                  fit: BoxFit.contain,
+                  height: 100.0,
+                ),
+              )
+            else
+              Container(
+                width: 200.0,
+                height: 100.0,
               ),
-            ),
-            // Display the food name and description on the right
             Expanded(
               flex: 3,
               child: Padding(
@@ -1086,25 +1090,17 @@ class FoodOption extends StatelessWidget {
                   children: [
                     Text(
                       foodItem.name,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8.0),
                     Text(
                       foodItem.description,
-                      style: TextStyle(
-                        fontSize: 14.0,
-                      ),
+                      style: TextStyle(fontSize: 14.0),
                     ),
                     SizedBox(height: 8.0),
                     Text(
                       "\$${foodItem.price.toStringAsFixed(2)}",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

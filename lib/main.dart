@@ -8,7 +8,24 @@ import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'cart_model.dart';
 import 'restaurant_list.dart';
-void main() => runApp(MyApp());
+import 'package:firebase_core/firebase_core.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Ensure widget binding is initialized
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+        apiKey: "AIzaSyAmNx-ZIbRwikaR2J2AW5f5S-uB1Ax94pY",
+        authDomain: "r-delivery-1e16f.firebaseapp.com",
+        databaseURL: "https://r-delivery-1e16f-default-rtdb.firebaseio.com",
+        projectId: "r-delivery-1e16f",
+        storageBucket: "r-delivery-1e16f.appspot.com",
+        messagingSenderId: "768251260161",
+        appId: "1:768251260161:web:d7f01ddc12b37c59e0ff00"
+    ),
+  ); // Initialize Firebase before the app starts
+  runApp(MyApp()); // Run the app
+}
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -55,6 +72,8 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
   void _confirmAddress() async {
     LatLng center = _mapController.center;
     String address = await _getAddress(center);
+
+    Provider.of<CartModel>(context, listen: false).updateUserLocation(address, center);
 
     showModalBottomSheet(
       context: context,
@@ -112,8 +131,8 @@ class _AddressSelectionPageState extends State<AddressSelectionPage> {
             FlutterMap(
               mapController: _mapController,
               options: MapOptions(
-                center: _initialCenter,
-                zoom: 16.0,
+                initialCenter: _initialCenter,
+                initialZoom: 16.0,
                 minZoom: 16.0,
                 maxZoom: 18.0,
                 interactiveFlags: InteractiveFlag.pinchZoom | InteractiveFlag.drag,
