@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:food_bot/TheHabitDetail.dart';
 import 'package:provider/provider.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'cart_page.dart';
@@ -22,6 +21,7 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
   List<GlobalKey> _keys = List.generate(7, (index) => GlobalKey());
   Timer? _debounce;
   bool _tabChangeByScroll = false;
+
 
   @override
   void initState() {
@@ -45,6 +45,7 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
           final double viewportTop = _scrollController.position.pixels;
           final double viewportBottom = viewportTop + _scrollController.position.viewportDimension;
 
+          // Check if the item is in the viewport
           if (itemTop <= viewportBottom && (itemTop >= viewportTop || position.dy <= viewportBottom)) {
             final double distance = (viewportTop - itemTop).abs();
             if (distance < closestDistance) {
@@ -64,12 +65,18 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
     });
   }
 
+
+
+
   void _handleTabSelection() {
     if (_tabController.indexIsChanging && !_tabChangeByScroll) {
+      // User initiated tab change through direct interaction
       _scrollToIndex(_tabController.index);
     }
+    // Always reset the flag after handling tab selection
     _tabChangeByScroll = false;
   }
+
 
   Future _scrollToIndex(int index) async {
     await _scrollController.scrollToIndex(index, preferPosition: AutoScrollPosition.begin);
@@ -84,12 +91,14 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
     super.dispose();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Chronic Tacos'),
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         bottom: PreferredSize(
           preferredSize: TabBar(
@@ -98,13 +107,13 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white,
             tabs: [
-              Tab(text: 'Tacos'),
-              Tab(text: 'Burritos'),
-              Tab(text: 'Specialties'),
-              Tab(text: 'Salads'),
-              Tab(text: 'Sides'),
+              Tab(text: 'Taco Plate'),
+              Tab(text: 'Burrito'),
+              Tab(text: 'Bowl-rito'),
+              Tab(text: 'Quesadilla'),
+              Tab(text: 'Small Burrito'),
+              Tab(text: 'A La Carte'),
               Tab(text: 'Drinks'),
-              Tab(text: 'Desserts'),
             ],
           ).preferredSize,
           child: Align(
@@ -116,13 +125,13 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
               unselectedLabelColor: Colors.white,
               indicatorSize: TabBarIndicatorSize.tab,
               tabs: [
-                Tab(text: 'Tacos'),
-                Tab(text: 'Burritos'),
-                Tab(text: 'Specialties'),
-                Tab(text: 'Salads'),
-                Tab(text: 'Sides'),
+                Tab(text: 'Taco Plate'),
+                Tab(text: 'Burrito'),
+                Tab(text: 'Bowl-rito'),
+                Tab(text: 'Quesadilla'),
+                Tab(text: 'Small Burrito'),
+                Tab(text: 'A La Carte'),
                 Tab(text: 'Drinks'),
-                Tab(text: 'Desserts'),
               ],
             ),
           ),
@@ -137,34 +146,232 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
             index: 0,
             child: FoodCategory(
               key: _keys[0],
-              categoryName: 'Tacos',
+              categoryName: 'Taco Plate',
               isFirstCategory: true,
               foodList: [
-                // Example of a FoodItem, repeat similar structures for other items
                 FoodItem(
-                  name: 'Al Pastor Taco',
-                  description: 'Grilled pork marinated with pineapple, spices, and onions',
-                  image: 'assets/images/chronic_tacos/al_pastor_taco.jpg',
-                  price: 3.50,
+                  name: 'Taco Plate',
+                  description: 'Includes 2 tacos with side of rice, beans, and toppings',
+                  image: 'assets/images/chronic/taco.jpg',
+                  price: 9.95,
                   requiredOptions: [
                     RequiredOption(
-                        name: "Tortilla",
-                        options: ["Corn", "Flour"]
+                      name: "Pick A Protein",
+                      options: ["Carne Asada", "Pollo Asado", "Halal Chicken",
+                        "Carnitas", "Vegetarian"],
+                      optionPrices: {
+                        "Carne Asada": 1.00,
+                        "Halal Chicken": 1.00,
+                      },
                     ),
                     RequiredOption(
-                      name: "Salsa",
-                      options: ["Green", "Red", "Pico de Gallo"],
+                        name: "Pick A Style",
+                        options: ["Street Style", "Gringo Style", "Baja Style"]
                     ),
                   ],
-                  extras: [
-                    ExtraOption(name: "Guacamole", price: 1.00),
-                    ExtraOption(name: "Cheese", price: 0.50),
-                  ],
+                  extras: [],
                 ),
               ],
             ),
           ),
-          // Add more AutoScrollTags for other categories
+          AutoScrollTag(
+            key: _keys[1],
+            controller: _scrollController,
+            index: 1,
+            child: FoodCategory(
+              key: _keys[1],
+              categoryName: 'Burrito',
+              isFirstCategory: false,
+              foodList: [
+                FoodItem(
+                  name: 'Burrito',
+                  description: 'Choice of protein, rice, beans and toppings',
+                  image: 'assets/images/chronic/burr.jpg',
+                  price: 9.95,
+                  requiredOptions: [
+                    RequiredOption(
+                      name: "Pick A Protein",
+                      options: ["Carne Asada", "Pollo Asado", "Halal Chicken",
+                        "Carnitas", "Vegetarian"],
+                      optionPrices: {
+                        "Carne Asada": 1.00,
+                        "Halal Chicken": 1.00,
+                      },
+                    ),
+                    RequiredOption(
+                        name: "Pick A Style",
+                        options: ["Street Style", "Gringo Style", "Baja Style"]
+                    ),
+                  ],
+                  extras: [],
+                ),
+              ],
+            ),
+          ),
+          AutoScrollTag(
+            key: _keys[2],
+            controller: _scrollController,
+            index: 2,
+            child: FoodCategory(
+              key: _keys[2],
+              categoryName: 'Bowl-rito',
+              isFirstCategory: false,
+              foodList: [
+                FoodItem(
+                  name: 'Bowl-rito',
+                  description: 'Choice of protein, rice, beans and toppings',
+                  image: 'assets/images/chronic/bowl.jpg',
+                  price: 9.95,
+                  requiredOptions: [
+                    RequiredOption(
+                      name: "Pick A Protein",
+                      options: ["Carne Asada", "Pollo Asado", "Halal Chicken",
+                        "Carnitas", "Vegetarian"],
+                      optionPrices: {
+                        "Carne Asada": 1.00,
+                        "Halal Chicken": 1.00,
+                      },
+                    ),
+                    RequiredOption(
+                        name: "Pick A Style",
+                        options: ["Street Style", "Gringo Style", "Baja Style"]
+                    ),
+                  ],
+                  extras: [],
+                ),
+              ],
+            ),
+          ),
+          AutoScrollTag(
+            key: _keys[3],
+            controller: _scrollController,
+            index: 3,
+            child: FoodCategory(
+              key: _keys[3],
+              categoryName: 'Quesadilla',
+              isFirstCategory: false,
+              foodList: [
+                FoodItem(
+                  name: 'Quesadilla',
+                  description: 'Choice of protein, includes chips and salsa',
+                  image: 'assets/images/chronic/quesadilla.jpg',
+                  price: 10.50,
+                  requiredOptions: [
+                    RequiredOption(
+                      name: "Pick A Protein",
+                      options: ["Carne Asada", "Pollo Asado", "Halal Chicken",
+                        "Carnitas", "Vegetarian"],
+                      optionPrices: {
+                        "Carne Asada": 1.00,
+                        "Halal Chicken": 1.00,
+                      },
+                    ),
+                    RequiredOption(
+                        name: "Pick A Style",
+                        options: ["Street Style", "Gringo Style", "Baja Style"]
+                    ),
+                  ],
+                  extras: [],
+                ),
+              ],
+            ),
+          ),
+          AutoScrollTag(
+            key: _keys[4],
+            controller: _scrollController,
+            index: 4,
+            child: FoodCategory(
+              key: _keys[4],
+              categoryName: 'Small Burrito',
+              isFirstCategory: false,
+              foodList: [
+                FoodItem(
+                  name: 'Small Burrito',
+                  description: 'Choice of protein, rice, beans and toppings',
+                  image: 'assets/images/chronic/burrito.jpg',
+                  price: 7.50,
+                  requiredOptions: [
+                    RequiredOption(
+                      name: "Pick A Protein",
+                      options: ["Carne Asada", "Pollo Asado", "Halal Chicken",
+                        "Carnitas", "Vegetarian"],
+                      optionPrices: {
+                        "Carne Asada": 1.00,
+                        "Halal Chicken": 1.00,
+                      },
+                    ),
+                    RequiredOption(
+                        name: "Pick A Style",
+                        options: ["Street Style", "Gringo Style", "Baja Style"]
+                    ),
+                  ],
+                  extras: [],
+                ),
+              ],
+            ),
+          ),
+          AutoScrollTag(
+            key: _keys[5],
+            controller: _scrollController,
+            index: 5,
+            child: FoodCategory(
+              key: _keys[5],
+              categoryName: 'A La Carte',
+              isFirstCategory: false,
+              foodList: [
+                FoodItem(
+                  name: 'A La Carte',
+                  description: 'Extras',
+                  image: 'assets/images/chronic/extras.jpg',
+                  price: 0.00,
+                  requiredOptions: [
+                    RequiredOption(
+                      name: "Extras",
+                      options: ["Chips and Salsa", "Chips and Guacamole", "Churro Bites (8)",
+                        "Fajita Veggies", "Guacamole"],
+                      optionPrices: {
+                        "Chips and Salsa": 2.25,
+                        "Chips and Guacamole": 3.75,
+                        "Churro Bites (8)": 3.75,
+                        "Fajita Veggies": 1.00,
+                        "Guacamole": 2.25,
+                      },
+                    ),
+                  ],
+                  extras: [],
+                ),
+              ],
+            ),
+          ),
+          AutoScrollTag(
+            key: _keys[6],
+            controller: _scrollController,
+            index: 6,
+            child: FoodCategory(
+              key: _keys[6],
+              categoryName: 'Drinks',
+              isFirstCategory: false,
+              foodList: [
+                FoodItem(
+                  name: 'Drinks',
+                  description: 'Feeling Thirsty?',
+                  image: 'assets/images/chronic/drinks.jpg',
+                  price: 0.00,
+                  requiredOptions: [
+                    RequiredOption(
+                      name: "Drinks",
+                      options: ["Regular Drink", "Specialty Drink"],
+                      optionPrices: {
+                        "Regular Drink": 2.75,
+                        "Specialty Drink": 3.00,
+                      },
+                    ),
+                  ],
+                  extras: [],
+                ),
+              ],
+            ),
+          ),
         ],
       ),
       bottomNavigationBar: Column(
@@ -193,7 +400,6 @@ class _ChronicTacosDetailState extends State<ChronicTacosDetail> with SingleTick
     );
   }
 }
-
 
 class FoodCategory extends StatelessWidget {
   final GlobalKey key;

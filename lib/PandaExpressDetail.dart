@@ -111,7 +111,6 @@ class _PandaExpressDetailState extends State<PandaExpressDetail> with SingleTick
               Tab(text: 'Plate'),
               Tab(text: 'Bigger Plate'),
               Tab(text: 'Family Meal'),
-              Tab(text: 'A La Carte'),
               Tab(text: 'Drinks'),
               Tab(text: 'Appetizers and More'),
             ],
@@ -129,7 +128,6 @@ class _PandaExpressDetailState extends State<PandaExpressDetail> with SingleTick
                 Tab(text: 'Plate'),
                 Tab(text: 'Bigger Plate'),
                 Tab(text: 'Family Meal'),
-                Tab(text: 'A La Carte'),
                 Tab(text: 'Drinks'),
                 Tab(text: 'Appetizers and More'),
               ],
@@ -167,6 +165,174 @@ class _PandaExpressDetailState extends State<PandaExpressDetail> with SingleTick
                         "Firecracker Shrimp": 1.60,
                         "Black Pepper Angus Steak": 1.60,
                         "Honey Walnut Shrimp": 1.60,
+                      },
+                    ),
+                  ],
+                  extras: [],
+                ),
+              ],
+            ),
+          ),
+          AutoScrollTag(
+            key: _keys[1],
+            controller: _scrollController,
+            index: 1,
+            child: FoodCategory(
+              key: _keys[1],
+              categoryName: 'Plate',
+              isFirstCategory: false,
+              foodList: [
+                FoodItem(
+                  name: 'Plate',
+                  description: 'Any 1 Side & 2 Entrees',
+                  image: 'assets/images/panda/plate.jpg',
+                  price: 9.90,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Step 1",
+                        options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                    ),
+                    RequiredOption(
+                      name: "Step 2",
+                      options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                        "Honey Walnut Shrimp", "Grilled Teriyaki Chicken"],
+                      optionPrices: {
+                        "Firecracker Shrimp": 1.60,
+                        "Black Pepper Angus Steak": 1.60,
+                        "Honey Walnut Shrimp": 1.60,
+                      },
+                    ),
+                  ],
+                  extras: [],
+                ),
+              ],
+            ),
+          ),
+          AutoScrollTag(
+            key: _keys[2],
+            controller: _scrollController,
+            index: 2,
+            child: FoodCategory(
+              key: _keys[2],
+              categoryName: 'Bigger Plate',
+              isFirstCategory: false,
+              foodList: [
+                FoodItem(
+                  name: 'Bigger Plate',
+                  description: 'Any 1 Side & 2 Entrees',
+                  image: 'assets/images/panda/bigger.jpg',
+                  price: 11.40,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Step 1",
+                        options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                    ),
+                    RequiredOption(
+                      name: "Step 2",
+                      options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                        "Honey Walnut Shrimp", "Grilled Teriyaki Chicken"],
+                      optionPrices: {
+                        "Firecracker Shrimp": 1.60,
+                        "Black Pepper Angus Steak": 1.60,
+                        "Honey Walnut Shrimp": 1.60,
+                      },
+                    ),
+                  ],
+                  extras: [],
+                ),
+              ],
+            ),
+          ),
+          AutoScrollTag(
+            key: _keys[3],
+            controller: _scrollController,
+            index: 3,
+            child: FoodCategory(
+              key: _keys[3],
+              categoryName: 'Family Meal',
+              isFirstCategory: false,
+              foodList: [
+                FoodItem(
+                  name: 'Family Meal',
+                  description: '2 Large Sides & 3 Entrees',
+                  image: 'assets/images/panda/family.jpg',
+                  price: 43.00,
+                  requiredOptions: [
+                    RequiredOption(
+                        name: "Step 1",
+                        options: ["Chow Mein", "Fried Rice", "White Steamed Rice", "Super Greens"]
+                    ),
+                    RequiredOption(
+                      name: "Step 2",
+                      options: ["Firecracker Shrimp", "The Original Orange Chicken", "Black Pepper Angus Steak",
+                        "Honey Walnut Shrimp", "Grilled Teriyaki Chicken"],
+                      optionPrices: {
+                        "Firecracker Shrimp": 1.60,
+                        "Black Pepper Angus Steak": 1.60,
+                        "Honey Walnut Shrimp": 1.60,
+                      },
+                    ),
+                  ],
+                  extras: [],
+                ),
+              ],
+            ),
+          ),
+          AutoScrollTag(
+            key: _keys[4],
+            controller: _scrollController,
+            index: 4,
+            child: FoodCategory(
+              key: _keys[4],
+              categoryName: 'Drinks',
+              isFirstCategory: false,
+              foodList: [
+                FoodItem(
+                  name: 'Drinks',
+                  description: 'Add a refreshing beverage',
+                  image: 'assets/images/panda/drinks2.jpg',
+                  price: 0.00,
+                  requiredOptions: [
+                    RequiredOption(
+                      name: "Drinks",
+                      options: ["Regular Drink", "Large Drink"],
+                      optionPrices: {
+                        "Regular Drink": 1.50,
+                        "Large Drink": 2.00,
+                      },
+                    ),
+                  ],
+                  extras: [],
+                ),
+              ],
+            ),
+          ),
+          AutoScrollTag(
+            key: _keys[5],
+            controller: _scrollController,
+            index: 5,
+            child: FoodCategory(
+              key: _keys[5],
+              categoryName: 'Appetizers and More',
+              isFirstCategory: false,
+              foodList: [
+                FoodItem(
+                  name: 'Appetizers and More',
+                  description: 'Extras',
+                  image: 'assets/images/panda/app.jpg',
+                  price: 0.00,
+                  requiredOptions: [
+                    RequiredOption(
+                      name: "Extras",
+                      options: ["Chicken Egg Roll - Small (1)", "Chicken Egg Roll - Large (6)" "Veggie Spring Roll - Small (2)", "Veggie Spring Roll - Large (12)", "Cream Cheese Rangoon (3)",
+                        "Hot and Sour Soup"],
+                      optionPrices: {
+                        "Chicken Egg Roll - Small (1)": 2.00,
+                        "Chicken Egg Roll - Large (6)": 11.20,
+                        "Veggie Spring Roll - Small (2)": 2.00,
+                        "Veggie Spring Roll - Large (12)": 11.20,
+                        "Cream Cheese Rangoon (3)": 2.00,
+                        "Hot and Sour Soup": 1.50,
                       },
                     ),
                   ],
